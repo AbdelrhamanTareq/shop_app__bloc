@@ -6,6 +6,7 @@ final lightTheme = ThemeData(
   accentColor: Colors.blueAccent,
   brightness: Brightness.light,
   canvasColor: Colors.white,
+  fontFamily: 'Cairo',
 
   ///////////////// App Bar //////////////////////
   appBarTheme: AppBarTheme(
@@ -14,5 +15,9 @@ final lightTheme = ThemeData(
   ),
 
   ///////////////// Text //////////////////////
-  // textTheme: TextTheme(),
+  textTheme: TextTheme(
+      headline4: TextStyle(
+          fontSize: 26, fontWeight: FontWeight.w700, color: Colors.redAccent),
+      headline6: TextStyle(
+          fontSize: 20, fontWeight: FontWeight.w200, color: Colors.grey)),
 );

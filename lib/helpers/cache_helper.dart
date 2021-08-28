@@ -6,13 +6,21 @@ class CacheHelper {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  static Future<bool> setToken(String key, bool value) async {
+  static Future<bool> setOnboarding(String key, bool value) async {
     // _prefs = await SharedPreferences.getInstance();
-    return _prefs.setBool(key, value);
+    return await _prefs.setBool(key, value);
   }
 
-  static bool? getToken(String key) {
+  static bool? getOnboarding(String key) {
     // _prefs = await SharedPreferences.getInstance();
     return _prefs.getBool(key);
+  }
+
+  static Future<bool> setToken(String key, String value) async {
+    return await _prefs.setString(key, value);
+  }
+
+  static String? getToken(String key) {
+    return _prefs.getString(key);
   }
 }

@@ -82,11 +82,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   ),
                   Text(
                     '${_onBoarding[i].title}',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.headline4,
                   ),
                   SizedBox(
                     height: 20,
@@ -121,7 +117,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     minimumSize: MaterialStateProperty.all<Size>(Size(1, 1)),
                   ),
                   onPressed: () {
-                    CacheHelper.setToken('onBoarding', true);
+                    CacheHelper.setOnboarding('onBoarding', true);
                     navAndFininsh(context, HomeScreen());
                   },
                   child: Text(
@@ -139,7 +135,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   ),
                   onPressed: () {
                     if (_currentIndex == _onBoarding.length - 1) {
-                      CacheHelper.setToken('onBoarding', true);
+                      CacheHelper.setOnboarding('onBoarding', true);
                       navAndFininsh(
                         context,
                         HomeScreen(),
