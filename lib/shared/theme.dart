@@ -16,8 +16,18 @@ final lightTheme = ThemeData(
 
   ///////////////// Text //////////////////////
   textTheme: TextTheme(
-      headline4: TextStyle(
-          fontSize: 26, fontWeight: FontWeight.w700, color: Colors.redAccent),
-      headline6: TextStyle(
-          fontSize: 20, fontWeight: FontWeight.w200, color: Colors.grey)),
+    headline4: TextStyle(
+        fontSize: 26, fontWeight: FontWeight.w700, color: Colors.redAccent),
+    headline6: TextStyle(
+        fontSize: 20, fontWeight: FontWeight.w200, color: Colors.grey),
+    bodyText1: TextStyle(color: Colors.redAccent),
+    bodyText2: TextStyle(color: Colors.grey),
+  ),
+  ///////////////// Botton nav Bar //////////////////////
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    type: BottomNavigationBarType.fixed,
+    elevation: 10,
+    backgroundColor: Colors.white,
+    selectedItemColor: Colors.redAccent,
+  ),
 );

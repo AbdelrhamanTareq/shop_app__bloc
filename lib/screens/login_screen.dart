@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:shop_app_bloc/bloc/cuibts/auth_cuibt.dart';
 
 import 'package:shop_app_bloc/bloc/states/auth_state.dart';
 import 'package:shop_app_bloc/helpers/cache_helper.dart';
 import 'package:shop_app_bloc/helpers/dio_helper.dart';
 import 'package:shop_app_bloc/models/login_model.dart';
+import 'package:shop_app_bloc/screens/products_screen.dart';
 import 'package:shop_app_bloc/screens/home_screen.dart';
 import 'package:shop_app_bloc/screens/register_screen.dart';
 import 'package:shop_app_bloc/shared/component.dart';
@@ -17,15 +20,15 @@ class LoginScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _submit(context) async {
-    // LoginModel? _loginModel;
+    LoginModel? _loginModel;
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      await AuthCuibt.get(context)
+      _loginModel = await AuthCuibt.get(context)
           .login(email: _emailController.text, pass: _passController.text);
-      navTo(context, HomeScreen());
+      // await CacheHelper.setToken('token', _loginModel!.data!.token!);
+      // navAndFininsh(context, HomeScreen());
+      print('asdasd $_loginModel');
     }
-    // print('asdasd $_loginModel');
-    // await CacheHelper.setToken('token', _loginModel!.data!.token!);
   }
 
   @override
@@ -33,7 +36,24 @@ class LoginScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthCuibt(),
       child: BlocConsumer<AuthCuibt, AppAuthState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is AppLoginSuccuessState) {
+            if (state.loginModel.status!) {
+              CacheHelper.setToken('token', state.loginModel.data!.token!)
+                  .then((value) => {navAndFininsh(context, HomeScreen())});
+            } else {
+              Fluttertoast.showToast(
+                msg: state.loginModel.message!,
+                backgroundColor: Colors.red,
+                gravity: ToastGravity.BOTTOM,
+                toastLength: Toast.LENGTH_LONG,
+                fontSize: 16,
+                timeInSecForIosWeb: 5,
+                textColor: Colors.white,
+              );
+            }
+          }
+        },
         builder: (context, state) {
           return Scaffold(
             body: SingleChildScrollView(

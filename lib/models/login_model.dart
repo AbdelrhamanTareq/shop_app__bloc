@@ -1,5 +1,5 @@
 class LoginModel {
-  String? status;
+  bool? status;
   String? message;
   Data? data;
 
@@ -8,7 +8,7 @@ class LoginModel {
   LoginModel.fromJson(Map<String, dynamic> jsonData) {
     status = jsonData['status'];
     message = jsonData['message'];
-    data = jsonData['data'];
+    data = jsonData['data'] != null ? Data.fromJson(jsonData['data']) : null;
   }
 }
 

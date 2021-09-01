@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_app_bloc/helpers/cache_helper.dart';
+
+final String token = CacheHelper.getToken('token') ?? '';
 
 void navAndFininsh(context, Widget screen) {
   Navigator.of(context).pushAndRemoveUntil(

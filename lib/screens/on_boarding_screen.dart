@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app_bloc/helpers/cache_helper.dart';
+import 'package:shop_app_bloc/screens/products_screen.dart';
+import 'package:shop_app_bloc/screens/login_screen.dart';
 import 'package:shop_app_bloc/screens/home_screen.dart';
 import 'package:shop_app_bloc/shared/component.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -100,7 +102,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           SmoothPageIndicator(
             controller: _pageController,
             count: _onBoarding.length,
-            effect: ExpandingDotsEffect(),
+            effect: ExpandingDotsEffect(
+                activeDotColor: Theme.of(context).primaryColor),
           ),
           SizedBox(
             height: 25,
@@ -118,7 +121,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   ),
                   onPressed: () {
                     CacheHelper.setOnboarding('onBoarding', true);
-                    navAndFininsh(context, HomeScreen());
+                    navAndFininsh(context, LoginScreen());
                   },
                   child: Text(
                     'Skip',

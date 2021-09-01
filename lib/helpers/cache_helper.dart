@@ -23,4 +23,8 @@ class CacheHelper {
   static String? getToken(String key) {
     return _prefs.getString(key);
   }
+
+  static Future<bool> deletePref(String key) async {
+    return await _prefs.remove(key);
+  }
 }

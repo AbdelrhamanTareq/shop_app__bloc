@@ -12,6 +12,8 @@ class AuthCuibt extends Cubit<AppAuthState> {
 
   bool isVisible = false;
 
+  LoginModel? loginModel;
+
   void changeVisibality() {
     isVisible = !isVisible;
     emit(AppLoginChangeSuffixIconState());
@@ -20,17 +22,19 @@ class AuthCuibt extends Cubit<AppAuthState> {
   Future<LoginModel?> login(
       {required String email, required String pass}) async {
     emit(AppLoginLoadingState());
-    LoginModel? loginModel;
+    // LoginModel? loginModel;
     try {
       final response = await DioHelper.postData(endPoint: 'login', data: {
         'email': email,
         'password': pass,
       });
-      print(response.data);
+      print('response ${response.data}');
       loginModel = LoginModel.fromJson(response.data);
-      CacheHelper.setToken('token', loginModel.data!.token!);
+      // print('loginModel ${loginModel!.data!.token}');
+      // print('tt ${loginModel!.data!}');
+      // CacheHelper.setToken('token', loginModel!.data!.token!);
 
-      emit(AppLoginSuccuessState());
+      emit(AppLoginSuccuessState(loginModel!));
       // return loginModel;
     } catch (error) {
       print(error.toString());
@@ -46,7 +50,7 @@ class AuthCuibt extends Cubit<AppAuthState> {
     required String phone,
   }) async {
     emit(AppRegisterLoadingState());
-    LoginModel? loginModel;
+
     try {
       final response = await DioHelper.postData(endPoint: 'register', data: {
         'email': email,
@@ -56,8 +60,8 @@ class AuthCuibt extends Cubit<AppAuthState> {
       });
       print(response.data);
       loginModel = LoginModel.fromJson(response.data);
-      CacheHelper.setToken('token', loginModel.data!.token!);
-      emit(AppRegisterSuccuessState());
+      CacheHelper.setToken('token', loginModel!.data!.token!);
+      emit(AppRegisterSuccuessState(loginModel!));
     } catch (error) {
       print(error.toString());
       emit(AppRegisterErrorState(error.toString()));
