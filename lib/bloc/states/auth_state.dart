@@ -1,4 +1,4 @@
-import 'package:shop_app_bloc/models/login_model.dart';
+import '/models/login_model.dart';
 
 abstract class AppAuthState {}
 

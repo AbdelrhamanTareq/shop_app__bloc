@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app_bloc/bloc/cuibts/home_cuibt.dart';
-import 'package:shop_app_bloc/bloc/states/home_state.dart';
+
+import '/bloc/cuibts/home_cuibt.dart';
+import '/bloc/states/home_state.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -15,7 +17,11 @@ class HomeScreen extends StatelessWidget {
               'My Shop',
               style: TextStyle(color: Colors.black),
             ),
+            actions: [
+              buildCartBadge(context),
+            ],
           ),
+          drawer: Drawer(),
           bottomNavigationBar: BottomNavigationBar(
             items: [
               BottomNavigationBarItem(
@@ -44,6 +50,43 @@ class HomeScreen extends StatelessWidget {
               .screens[HomeCubit.get(context).currentIndex],
         );
       },
+    );
+  }
+
+  Padding buildCartBadge(context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+      child: Stack(
+        children: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.shopping_cart,
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+          Positioned(
+            top: 0.0,
+            right: 5,
+            child: Container(
+              padding: EdgeInsets.all(1),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.redAccent,
+              ),
+              constraints: BoxConstraints(
+                minWidth: 12,
+                minHeight: 12,
+              ),
+              child: Text(
+                '0',
+                style: TextStyle(color: Colors.white, fontSize: 8),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app_bloc/bloc/cuibts/home_cuibt.dart';
-
-import 'package:shop_app_bloc/helpers/cache_helper.dart';
-import 'package:shop_app_bloc/screens/login_screen.dart';
-import 'package:shop_app_bloc/screens/on_boarding_screen.dart';
-import 'package:shop_app_bloc/screens/home_screen.dart';
-import 'package:shop_app_bloc/shared/component.dart';
-import 'package:shop_app_bloc/shared/theme.dart';
-
-import 'screens/products_screen.dart';
 import 'helpers/dio_helper.dart';
+
+import '/bloc/cuibts/home_cuibt.dart';
+import '/helpers/cache_helper.dart';
+import '/screens/login_screen.dart';
+import '/screens/on_boarding_screen.dart';
+import '/screens/home_screen.dart';
+import '/shared/component.dart';
+import '/shared/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +37,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: lightTheme,
         home: _onBoarding
-            ? ((token != null) ? HomeScreen() : LoginScreen())
+            ? ((token != '') ? HomeScreen() : LoginScreen())
             : OnBoardingScreen()
         //  _onBoarding ? ((_token != null)) ? HomeScreen():
         //  (_token != null) ? HomeScreen() : LoginScreen()

@@ -12,3 +12,15 @@ class HomeErorrState extends HomeStates {
 }
 
 class HomeChangeNavBarState extends HomeStates {}
+
+class HomeAddOrRemoveFavoreitesChangeState extends HomeStates {}
+
+class HomeAddOrRemoveFavoreitesSuccsesState extends HomeStates {}
+
+class HomeAddOrRemoveFavoreitesErrorState extends HomeStates {}
+
+class GetProductDetailsLoadingState extends HomeStates {}
+
+class GetProductDetailSuccsesState extends HomeStates {}
+
+class GetProductDetailsErrorState extends HomeStates {}

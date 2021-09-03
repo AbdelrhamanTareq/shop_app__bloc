@@ -1,12 +1,13 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app_bloc/bloc/cuibts/home_cuibt.dart';
-import 'package:shop_app_bloc/bloc/states/home_state.dart';
-import 'package:shop_app_bloc/helpers/cache_helper.dart';
-import 'package:shop_app_bloc/models/home_model.dart';
-import 'package:shop_app_bloc/screens/login_screen.dart';
-import 'package:shop_app_bloc/shared/component.dart';
+
+import '/screens/product_details_screen.dart';
+import '/shared/component.dart';
+import '/bloc/cuibts/home_cuibt.dart';
+import '/bloc/states/home_state.dart';
+import '/models/home_model.dart';
 
 class ProductsScreen extends StatelessWidget {
   @override
@@ -15,11 +16,11 @@ class ProductsScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         final HomeModel? _homeData = HomeCubit.get(context).homeModel;
+
         // print(_homeData!.data);
 
         return Scaffold(
           // backgroundColor: Colors.grey,
-
           body: (state is HomeLoadingState)
               ? Center(
                   child: CircularProgressIndicator(),
@@ -55,6 +56,11 @@ class ProductsScreen extends StatelessWidget {
                           autoPlay: true,
                         ),
                       ),
+                      Text(
+                        'Products',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      SizedBox(height: 10),
                       GridView.builder(
                           itemCount: _homeData!.data!.products.length,
                           shrinkWrap: true,
@@ -68,7 +74,12 @@ class ProductsScreen extends StatelessWidget {
                             // mainAxisExtent: 1,
                           ),
                           itemBuilder: (ctx, i) => InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  navTo(
+                                      context,
+                                      ProductDetailsScreen(
+                                          _homeData.data!.products[i].id!));
+                                },
                                 child: Container(
                                   // color: Colors.grey,
                                   // height: 300,
@@ -83,11 +94,15 @@ class ProductsScreen extends StatelessWidget {
                                         child: Stack(
                                           alignment: Alignment.topLeft,
                                           children: [
-                                            Image.network(
-                                              _homeData
-                                                  .data!.products[i].image!,
-                                              // fit: BoxFit.cover,
-                                              width: double.infinity,
+                                            Hero(
+                                              tag: _homeData
+                                                  .data!.products[i].id!,
+                                              child: Image.network(
+                                                _homeData
+                                                    .data!.products[i].image!,
+                                                // fit: BoxFit.cover,
+                                                width: double.infinity,
+                                              ),
                                             ),
                                             (_homeData.data!.products[i]
                                                         .discount ==
@@ -154,11 +169,35 @@ class ProductsScreen extends StatelessWidget {
                                                         .bodyText1),
                                                 Spacer(),
                                                 IconButton(
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    HomeCubit.get(context)
+                                                        .addOrRemvoeFavorites(
+                                                            productId: _homeData
+                                                                .data!
+                                                                .products[i]
+                                                                .id!);
+                                                  },
                                                   icon: Icon(
-                                                    Icons.favorite_border,
-                                                    color: Theme.of(context)
-                                                        .primaryColor,
+                                                    (HomeCubit.get(context)
+                                                                    .favorites[
+                                                                _homeData
+                                                                    .data!
+                                                                    .products[i]
+                                                                    .id] ??
+                                                            false)
+                                                        ? Icons.favorite
+                                                        : Icons.favorite_border,
+                                                    color: (HomeCubit.get(
+                                                                        context)
+                                                                    .favorites[
+                                                                _homeData
+                                                                    .data!
+                                                                    .products[i]
+                                                                    .id] ??
+                                                            false)
+                                                        ? Theme.of(context)
+                                                            .primaryColor
+                                                        : Colors.black,
                                                   ),
                                                 ),
                                               ],

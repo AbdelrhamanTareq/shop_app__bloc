@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app_bloc/helpers/cache_helper.dart';
-import 'package:shop_app_bloc/screens/products_screen.dart';
-import 'package:shop_app_bloc/screens/login_screen.dart';
-import 'package:shop_app_bloc/screens/home_screen.dart';
-import 'package:shop_app_bloc/shared/component.dart';
+
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '/helpers/cache_helper.dart';
+import '/screens/login_screen.dart';
+import '/screens/home_screen.dart';
+import '/shared/component.dart';
 
 class OnBoaringModel {
   final String imagePath;

@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app_bloc/bloc/states/auth_state.dart';
-import 'package:shop_app_bloc/helpers/cache_helper.dart';
-import 'package:shop_app_bloc/helpers/dio_helper.dart';
-import 'package:shop_app_bloc/models/login_model.dart';
+
+import '/bloc/states/auth_state.dart';
+import '/helpers/cache_helper.dart';
+import '/helpers/dio_helper.dart';
+import '/models/login_model.dart';
 
 class AuthCuibt extends Cubit<AppAuthState> {
   AuthCuibt() : super(AppAuthInitialState());

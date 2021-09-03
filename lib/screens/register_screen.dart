@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app_bloc/bloc/cuibts/auth_cuibt.dart';
-import 'package:shop_app_bloc/bloc/states/auth_state.dart';
-import 'package:shop_app_bloc/screens/products_screen.dart';
-import 'package:shop_app_bloc/screens/login_screen.dart';
-import 'package:shop_app_bloc/screens/home_screen.dart';
-import 'package:shop_app_bloc/shared/component.dart';
+
+import '/bloc/cuibts/auth_cuibt.dart';
+import '/bloc/states/auth_state.dart';
+import '/screens/login_screen.dart';
+import '/screens/home_screen.dart';
+import '/shared/component.dart';
 
 class RegisterScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();

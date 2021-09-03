@@ -10,14 +10,14 @@ class DioHelper {
   }
 
   static Future<Response> postData(
-      {required String endPoint, required Map data}) async {
+      {required String endPoint, required Map data, String? token}) async {
     return await _dio.post(
       'https://student.valuxapps.com/api/$endPoint',
       data: data,
       options: Options(
-        receiveDataWhenStatusError: true,
-        contentType: 'application/json',
-      ),
+          receiveDataWhenStatusError: true,
+          contentType: 'application/json',
+          headers: {'Authorization': token ?? '', 'lang': 'en'}),
     );
   }
 
