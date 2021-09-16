@@ -31,6 +31,16 @@ class DioHelper {
     );
   }
 
+  // static Future<Response> getCat({required String endPoint}) async {
+  //   return await _dio.get(
+  //     'https://student.valuxapps.com/api/$endPoint',
+  //     options: Options(
+  //         receiveDataWhenStatusError: true,
+  //         contentType: 'application/json',
+  //         headers: {'lang': 'en'}),
+  //   );
+  // }
+
   // static getData() async {
   //   await _dio
   //       .get(

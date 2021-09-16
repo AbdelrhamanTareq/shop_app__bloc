@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:shop_app_bloc/bloc/cuibts/category_cuibt.dart';
 import 'helpers/dio_helper.dart';
 
 import '/bloc/cuibts/home_cuibt.dart';
@@ -15,6 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   await DioHelper.init();
+  configLoading();
   runApp(MyApp());
 }
 
@@ -29,11 +32,21 @@ class MyApp extends StatelessWidget {
     print(token);
     return MultiBlocProvider(
       providers: [
-        BlocProvider<HomeCubit>(
-          create: (context) => HomeCubit()..getHomeData(),
+        BlocProvider(
+          create: (BuildContext context) => CategoryCubit()
+            ..getCategoryData()
+            ..funfun('gjghj'),
         ),
+        BlocProvider(
+          create: (BuildContext context) => HomeCubit()..getHomeData(),
+        ),
+
+        // BlocProvider<CategoryCubit>(
+        //   create: (context) => CategoryCubit()..getCategoryData(),
+        // ),
       ],
       child: MaterialApp(
+        builder: EasyLoading.init(),
         debugShowCheckedModeBanner: false,
         theme: lightTheme,
         home: _onBoarding

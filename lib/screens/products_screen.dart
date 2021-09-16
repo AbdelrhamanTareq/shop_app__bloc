@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '/screens/product_details_screen.dart';
 import '/shared/component.dart';
@@ -18,6 +19,11 @@ class ProductsScreen extends StatelessWidget {
         final HomeModel? _homeData = HomeCubit.get(context).homeModel;
 
         // print(_homeData!.data);
+        if (state is GetProductDetailsLoadingState) {
+          EasyLoading.show();
+        } else if (state is GetProductDetailSuccsesState) {
+          EasyLoading.dismiss();
+        }
 
         return Scaffold(
           // backgroundColor: Colors.grey,
@@ -27,6 +33,7 @@ class ProductsScreen extends StatelessWidget {
                 )
               : SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // TextButton(
                       //     onPressed: () async {
@@ -56,9 +63,15 @@ class ProductsScreen extends StatelessWidget {
                           autoPlay: true,
                         ),
                       ),
-                      Text(
-                        'Products',
-                        style: Theme.of(context).textTheme.bodyText1,
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          'Products',
+                          style: Theme.of(context).textTheme.headline4,
+                        ),
                       ),
                       SizedBox(height: 10),
                       GridView.builder(
@@ -75,10 +88,52 @@ class ProductsScreen extends StatelessWidget {
                           ),
                           itemBuilder: (ctx, i) => InkWell(
                                 onTap: () {
-                                  navTo(
-                                      context,
-                                      ProductDetailsScreen(
-                                          _homeData.data!.products[i].id!));
+                                  print('dfgsdser');
+                                  HomeCubit.get(context)
+                                      .getProductDetails(
+                                          _homeData.data!.products[i].id)
+                                      .then((value) {
+                                    if (state is GetProductDetailSuccsesState) {
+                                      navTo(
+                                          context,
+                                          ProductDetailsScreen(
+                                              _homeData.data!.products[i].id!));
+                                    }
+                                  });
+                                  // .then((value) => EasyLoading.dismiss());
+
+                                  // EasyLoading().
+                                  // SplashScreen.navigate(
+                                  //     until: () async {
+                                  //       await HomeCubit.get(context)
+                                  //           .getProductDetails(_homeData
+                                  //               .data!.products[i].id!);
+                                  //     },
+                                  //     name: 'name',
+                                  //     next: (_) => ProductDetailsScreen(
+                                  //         _homeData.data!.products[i].id!));
+
+                                  // SplashScreen.callback(
+                                  // until: () async {
+                                  //   await HomeCubit.get(context)
+                                  //       .getProductDetails(_homeData
+                                  //           .data!.products[i].id!);
+                                  // },
+                                  //     name: 'dfgdfg',
+                                  //     onSuccess: (s) {
+                                  //       navTo(
+                                  //           context,
+                                  //           ProductDetailsScreen(_homeData
+                                  //               .data!.products[i].id!));
+                                  //     },
+                                  //     onError: (e, s) {
+                                  //       print(e);
+                                  //       print(s);
+                                  //     });
+                                  // navTo(
+                                  //     context,
+                                  //     ProductDetailsScreen(
+                                  //         _homeData.data!.products[i].id!));
                                 },
                                 child: Container(
                                   // color: Colors.grey,

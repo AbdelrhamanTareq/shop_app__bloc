@@ -85,11 +85,11 @@ class HomeCubit extends Cubit<HomeStates> {
     return changeFavoriteModel;
   }
 
+  ProductModel? productModel;
   Future<ProductModel?> getProductDetails(id) async {
-    ProductModel? productModel;
     emit(GetProductDetailsLoadingState());
     try {
-      final response = await DioHelper.getData(endPoint: 'product/$id');
+      final response = await DioHelper.getData(endPoint: 'products/$id');
       productModel = ProductModel.fromJson(response.data);
       emit(GetProductDetailSuccsesState());
       print('productModel $productModel');
