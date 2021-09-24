@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app_bloc/bloc/cuibts/home_cuibt.dart';
 import 'package:shop_app_bloc/bloc/states/home_state.dart';
 import 'package:shop_app_bloc/models/product_details_model.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   late final int productId;

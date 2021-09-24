@@ -24,3 +24,21 @@ class GetProductDetailsLoadingState extends HomeStates {}
 class GetProductDetailSuccsesState extends HomeStates {}
 
 class GetProductDetailsErrorState extends HomeStates {}
+
+class GetCategoryLoadingState extends HomeStates {}
+
+class GetCategorySuccsesState extends HomeStates {}
+
+class GetCategoryErorrState extends HomeStates {}
+
+class GetCategoryDetailsLoadingState extends HomeStates {}
+
+class GetCategoryDetailsSuccsesState extends HomeStates {}
+
+class GetCategoryDetailsErrorState extends HomeStates {} 
+
+// class CategoryLoadingState extends HomeStates {}
+
+// class CategorySucsessState extends HomeStates {}
+
+// class CategoryErorrState extends HomeStates {}

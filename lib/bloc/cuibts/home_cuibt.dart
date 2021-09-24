@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app_bloc/models/category_details_model.dart';
+import 'package:shop_app_bloc/models/category_model.dart';
 import 'package:shop_app_bloc/models/change_favorite_model.dart';
 import 'package:shop_app_bloc/models/product_details_model.dart';
 import 'package:shop_app_bloc/shared/component.dart';
@@ -71,11 +73,12 @@ class HomeCubit extends Cubit<HomeStates> {
           },
           token: token);
       changeFavoriteModel = ChangeFavorite.fromJson(response.data);
-      print(response.data);
+      // print(response.data);
 
       if (!changeFavoriteModel.status!) {
         favorites[productId] = !favorites[productId]!;
       }
+      print(favorites);
 
       emit(HomeAddOrRemoveFavoreitesSuccsesState());
     } catch (error) {
@@ -99,4 +102,56 @@ class HomeCubit extends Cubit<HomeStates> {
     }
     return productModel;
   }
+
+  CategoreyModel? categoreyModel;
+  Future<CategoreyModel?> getCategoryData() async {
+    emit(GetCategoryLoadingState());
+    try {
+      final response = await DioHelper.getData(endPoint: 'categories');
+      categoreyModel = CategoreyModel.fromJson(response.data);
+      print(categoreyModel!.data!.dataModel![0].name);
+      emit(GetCategorySuccsesState());
+      // print('abcdef    ${response.data}');
+    } catch (error) {
+      emit(GetCategoryErorrState());
+      print(error.toString());
+    }
+    return categoreyModel;
+  }
+
+  CategoryDetailsModel? categoreyDetailsModel;
+  Future<CategoryDetailsModel?> getCategoryDetails(int id) async {
+    emit(GetCategoryDetailsLoadingState());
+    try {
+      final response = await DioHelper.getData(endPoint: 'categories/$id');
+      categoreyDetailsModel = CategoryDetailsModel.fromJson(response.data);
+      // print('response.data ${response.data}');
+      // print('object');
+      print(categoreyDetailsModel!.data!.dataModel![0].images);
+      emit(GetCategoryDetailsSuccsesState());
+      // print('abcdef    ${response.data}');
+    } catch (error) {
+      emit(GetCategoryDetailsErrorState());
+      print(error.toString());
+    }
+    return categoreyDetailsModel;
+  }
+
+  // CategoryDetailsModel? categoreyDetailsModel;
+  // Future<CategoryDetailsModel?> getCategoryDetails(int id) async {
+  //   emit(GetProductDetailsLoadingState());
+  //   try {
+  //     final response = await DioHelper.getData(endPoint: 'categories/$id');
+  //     categoreyDetailsModel = CategoryDetailsModel.fromJson(response.data);
+  //     // print('response.data ${response.data}');
+  //     // print('object');
+  //     print(categoreyDetailsModel!.data!.dataModel![0].images);
+  //     emit(GetProductDetailSuccsesState());
+  //     // print('abcdef    ${response.data}');
+  //   } catch (error) {
+  //     emit(GetProductDetailsErrorState());
+  //     print(error.toString());
+  //   }
+  //   return categoreyDetailsModel;
+  // }
 }

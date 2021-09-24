@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:shop_app_bloc/bloc/states/category_states.dart';
 
 import '/screens/product_details_screen.dart';
 import '/shared/component.dart';
@@ -19,15 +20,18 @@ class ProductsScreen extends StatelessWidget {
         final HomeModel? _homeData = HomeCubit.get(context).homeModel;
 
         // print(_homeData!.data);
-        if (state is GetProductDetailsLoadingState) {
+        if (state is CategoryDetailsSucsessState) {
           EasyLoading.show();
-        } else if (state is GetProductDetailSuccsesState) {
-          EasyLoading.dismiss();
         }
+        //  else if (state is GetProductDetailSuccsesState) {
+        //   EasyLoading.dismiss();
+        // }
 
         return Scaffold(
           // backgroundColor: Colors.grey,
-          body: (state is HomeLoadingState)
+          body: (state is HomeLoadingState || _homeData == null
+              // state is! HomeSuccsesState
+              )
               ? Center(
                   child: CircularProgressIndicator(),
                 )
@@ -35,22 +39,14 @@ class ProductsScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // TextButton(
-                      //     onPressed: () async {
-                      //       CacheHelper.deletePref('token');
-                      //       navAndFininsh(context, LoginScreen());
-                      //     },
-                      //     child: Text('asdasdasdasd')),
                       CarouselSlider.builder(
-                        itemCount: 4
-                        // _homeData!.data!.banners.length
-                        ,
+                        itemCount: 4,
                         itemBuilder: (ctx, index, i) => Container(
                           height: MediaQuery.of(context).size.height / 3,
                           width: double.infinity,
                           child: Image(
                             image: NetworkImage(
-                              _homeData!.data!.banners[index].image!,
+                              _homeData.data!.banners[index].image!,
                             ),
                             fit: BoxFit.cover,
                           ),
@@ -75,7 +71,7 @@ class ProductsScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 10),
                       GridView.builder(
-                          itemCount: _homeData!.data!.products.length,
+                          itemCount: _homeData.data!.products.length,
                           shrinkWrap: true,
                           physics: ClampingScrollPhysics(),
                           gridDelegate:
@@ -88,11 +84,12 @@ class ProductsScreen extends StatelessWidget {
                           ),
                           itemBuilder: (ctx, i) => InkWell(
                                 onTap: () {
-                                  print('dfgsdser');
+                                  print('stateeee $state');
                                   HomeCubit.get(context)
                                       .getProductDetails(
                                           _homeData.data!.products[i].id)
                                       .then((value) {
+                                    print('stateeee1 $state');
                                     if (state is GetProductDetailSuccsesState) {
                                       navTo(
                                           context,

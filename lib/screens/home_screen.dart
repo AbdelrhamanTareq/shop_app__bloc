@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app_bloc/bloc/cuibts/category_cuibt.dart';
 
 import '/bloc/cuibts/home_cuibt.dart';
 import '/bloc/states/home_state.dart';
@@ -61,7 +60,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () {
-              CategoryCubit.get(context).getCategoryData();
+              // CategoryCubit.get(context).getCategoryData();
             },
             icon: Icon(
               Icons.shopping_cart,

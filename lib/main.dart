@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shop_app_bloc/bloc/cuibts/category_cuibt.dart';
-import 'helpers/dio_helper.dart';
+import 'package:shop_app_bloc/shared/bloc_observer.dart';
 
+import './helpers/dio_helper.dart';
 import '/bloc/cuibts/home_cuibt.dart';
 import '/helpers/cache_helper.dart';
 import '/screens/login_screen.dart';
@@ -17,6 +18,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   await DioHelper.init();
+  Bloc.observer = MyBlocObserver();
+
   configLoading();
   runApp(MyApp());
 }
@@ -33,16 +36,14 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (BuildContext context) => CategoryCubit()
+          create: (BuildContext context) => HomeCubit()
             ..getCategoryData()
-            ..funfun('gjghj'),
+            ..getHomeData(),
+          lazy: false,
         ),
-        BlocProvider(
-          create: (BuildContext context) => HomeCubit()..getHomeData(),
-        ),
-
-        // BlocProvider<CategoryCubit>(
+        // BlocProvider(
         //   create: (context) => CategoryCubit()..getCategoryData(),
+        //   lazy: false,
         // ),
       ],
       child: MaterialApp(
