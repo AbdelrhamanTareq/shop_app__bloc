@@ -31,6 +31,16 @@ class DioHelper {
     );
   }
 
+  static Future<Response> deleteData({required String endPoint}) async {
+    return await _dio.delete(
+      'https://student.valuxapps.com/api/$endPoint',
+      options: Options(
+          receiveDataWhenStatusError: true,
+          contentType: 'application/json',
+          headers: {'Authorization': token, 'lang': 'en'}),
+    );
+  }
+
   // static Future<Response> getCat({required String endPoint}) async {
   //   return await _dio.get(
   //     'https://student.valuxapps.com/api/$endPoint',

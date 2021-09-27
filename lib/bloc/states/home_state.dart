@@ -35,8 +35,25 @@ class GetCategoryDetailsLoadingState extends HomeStates {}
 
 class GetCategoryDetailsSuccsesState extends HomeStates {}
 
-class GetCategoryDetailsErrorState extends HomeStates {} 
+class GetCategoryDetailsErrorState extends HomeStates {}
 
+class GetFavoriteLoadingState extends HomeStates {}
+
+class GetFavoriteSuccsesState extends HomeStates {}
+
+class GetFavoriteErrorState extends HomeStates {
+  final String error;
+  GetFavoriteErrorState(this.error);
+}
+
+class DeleteFavoriteLoadingState extends HomeStates {}
+
+class DeleteFavoriteSuccsesState extends HomeStates {}
+
+class DeleteFavoriteErrorState extends HomeStates {
+  final String error;
+  DeleteFavoriteErrorState(this.error);
+} 
 // class CategoryLoadingState extends HomeStates {}
 
 // class CategorySucsessState extends HomeStates {}

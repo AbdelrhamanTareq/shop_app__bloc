@@ -61,6 +61,7 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             onPressed: () {
               // CategoryCubit.get(context).getCategoryData();
+              HomeCubit.get(context).getFavoriteData();
             },
             icon: Icon(
               Icons.shopping_cart,

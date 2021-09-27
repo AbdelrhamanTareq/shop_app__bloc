@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app_bloc/models/category_details_model.dart';
 import 'package:shop_app_bloc/models/category_model.dart';
 import 'package:shop_app_bloc/models/change_favorite_model.dart';
+import 'package:shop_app_bloc/models/favorite_model.dart';
 import 'package:shop_app_bloc/models/product_details_model.dart';
 import 'package:shop_app_bloc/shared/component.dart';
 
@@ -79,7 +80,8 @@ class HomeCubit extends Cubit<HomeStates> {
         favorites[productId] = !favorites[productId]!;
       }
       print(favorites);
-
+      getFavoriteData();
+      // deleteFavorite()
       emit(HomeAddOrRemoveFavoreitesSuccsesState());
     } catch (error) {
       print(error.toString());
@@ -125,11 +127,9 @@ class HomeCubit extends Cubit<HomeStates> {
     try {
       final response = await DioHelper.getData(endPoint: 'categories/$id');
       categoreyDetailsModel = CategoryDetailsModel.fromJson(response.data);
-      // print('response.data ${response.data}');
-      // print('object');
+
       print(categoreyDetailsModel!.data!.dataModel![0].images);
       emit(GetCategoryDetailsSuccsesState());
-      // print('abcdef    ${response.data}');
     } catch (error) {
       emit(GetCategoryDetailsErrorState());
       print(error.toString());
@@ -137,21 +137,35 @@ class HomeCubit extends Cubit<HomeStates> {
     return categoreyDetailsModel;
   }
 
-  // CategoryDetailsModel? categoreyDetailsModel;
-  // Future<CategoryDetailsModel?> getCategoryDetails(int id) async {
-  //   emit(GetProductDetailsLoadingState());
-  //   try {
-  //     final response = await DioHelper.getData(endPoint: 'categories/$id');
-  //     categoreyDetailsModel = CategoryDetailsModel.fromJson(response.data);
-  //     // print('response.data ${response.data}');
-  //     // print('object');
-  //     print(categoreyDetailsModel!.data!.dataModel![0].images);
-  //     emit(GetProductDetailSuccsesState());
-  //     // print('abcdef    ${response.data}');
-  //   } catch (error) {
-  //     emit(GetProductDetailsErrorState());
-  //     print(error.toString());
-  //   }
-  //   return categoreyDetailsModel;
-  // }
+  FavoriteModel? favoriteModel;
+  Future<FavoriteModel?> getFavoriteData() async {
+    emit(GetFavoriteLoadingState());
+    try {
+      final response = await DioHelper.getData(endPoint: 'favorites');
+      favoriteModel = FavoriteModel.fromJson(response.data);
+      print(favoriteModel!.data!.dataModel![0].products!.name);
+      emit(GetFavoriteSuccsesState());
+    } catch (error) {
+      print(error.toString());
+      emit(GetFavoriteErrorState(error.toString()));
+    }
+    return favoriteModel;
+  }
+
+  Future deleteFavorite(int id, int productId) async {
+    emit(DeleteFavoriteLoadingState());
+    try {
+      final response = await DioHelper.deleteData(endPoint: 'favorites/$id');
+      print(response.data);
+      // await getFavoriteData();
+      // favoriteModel = FavoriteModel.fromJson(response.data);
+      // print(favoriteModel!.data!.dataModel![0].products!.name);
+
+      emit(DeleteFavoriteSuccsesState());
+    } catch (error) {
+      print(error.toString());
+      emit(DeleteFavoriteErrorState(error.toString()));
+    }
+    // addOrRemvoeFavorites(productId: productId);
+  }
 }
