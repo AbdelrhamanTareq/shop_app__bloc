@@ -41,51 +41,13 @@ class DioHelper {
     );
   }
 
-  // static Future<Response> getCat({required String endPoint}) async {
-  //   return await _dio.get(
-  //     'https://student.valuxapps.com/api/$endPoint',
-  //     options: Options(
-  //         receiveDataWhenStatusError: true,
-  //         contentType: 'application/json',
-  //         headers: {'lang': 'en'}),
-  //   );
-  // }
-
-  // static getData() async {
-  //   await _dio
-  //       .get(
-  //         'https://student.valuxapps.com/api/home',
-  //         options: Options(
-  //           contentType: 'application/json',
-  //           headers: {
-  //             'lang': 'ar',
-  //             'Authorization':
-  //                 'b676yF4HQTAGtP9bYNM2kjAw3VZ6vd63Ar7dr7jQvhISokVKIK5K3Emr4tiPctOBgBlZhV',
-  //           },
-  //           receiveDataWhenStatusError: true,
-  //         ),
-  //       )
-  //       .then((value) => print(value.data));
-  // }
-
-  // static getD() async {
-  //   await _dio
-  //       .post(
-  //         'https://student.valuxapps.com/api/login',
-  //         data: {
-  //           'email': 'abullah@gmail.com',
-  //           'password': '123456',
-  //         },
-  //         options: Options(
-  //           contentType: 'application/json',
-  //           // headers: {
-  //           //   'lang': 'ar',
-  //           //   'Authorization':
-  //           //       'b676yF4HQTAGtP9bYNM2kjAw3VZ6vd63Ar7dr7jQvhISokVKIK5K3Emr4tiPctOBgBlZhV',
-  //           // },
-  //           receiveDataWhenStatusError: true,
-  //         ),
-  //       )
-  //       .then((value) => print(value.data));
-  // }
+  static Future<Response> updateData(
+      {required String endPoint, required Map<String, dynamic> data}) async {
+    return await _dio.put('https://student.valuxapps.com/api/$endPoint',
+        options: Options(
+            receiveDataWhenStatusError: true,
+            contentType: 'application/json',
+            headers: {'Authorization': token, 'lang': 'en'}),
+        data: data);
+  }
 }

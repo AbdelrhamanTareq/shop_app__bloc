@@ -131,7 +131,7 @@ class RegisterScreen extends StatelessWidget {
                               obscureText: !AuthCuibt.get(context).isVisible,
                               validatorFunction: (String? val) {
                                 if (val != _passController.text) {
-                                  return 'Password doesnot matchd';
+                                  return 'Password doesnot matched';
                                 }
                                 return null;
                               }),

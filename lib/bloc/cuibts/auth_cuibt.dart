@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app_bloc/models/profile_model.dart';
+import 'package:shop_app_bloc/shared/component.dart';
 
 import '/bloc/states/auth_state.dart';
 import '/helpers/cache_helper.dart';
@@ -66,6 +68,53 @@ class AuthCuibt extends Cubit<AppAuthState> {
     } catch (error) {
       print(error.toString());
       emit(AppRegisterErrorState(error.toString()));
+    }
+  }
+
+  ProfileModel? profileModel;
+  Future<ProfileModel?> getProfileData() async {
+    emit(GetProfileLoadingState());
+    try {
+      final response = await DioHelper.getData(endPoint: 'profile');
+      profileModel = ProfileModel.fromJson(response.data);
+      print(profileModel!.message);
+      emit(GetProfileSuccuessState(profileModel!));
+    } catch (e) {
+      print(e.toString());
+      emit(GetProfileErrorState(e.toString()));
+    }
+  }
+
+  EditProfileModel? editProfileModel;
+  Future<ProfileModel?> editProfileData(Map<String, dynamic> data) async {
+    emit(EditProfileLoadingState());
+    try {
+      final response =
+          await DioHelper.updateData(endPoint: 'update-profile', data: data);
+      profileModel = ProfileModel.fromJson(response.data);
+      print(profileModel!.message);
+      // editProfileModel = EditProfileModel.fromJson(response.data);
+      // print(profileModel!.message);
+      // getProfileData();
+      emit(EditProfileSuccuessState(editProfileModel!));
+    } catch (e) {
+      print(e.toString());
+      emit(EditProfileErrorState(e.toString()));
+    }
+  }
+
+  Future changePassword(Map<String, dynamic> data) async {
+    emit(ChangePasswordLoadingState());
+    try {
+      final response = await DioHelper.postData(
+          endPoint: 'change-password', data: data, token: token);
+
+      print(response.data);
+
+      emit(ChangePasswordSuccuessState(response.data));
+    } catch (e) {
+      print(e.toString());
+      emit(ChangePasswordErrorState(e.toString()));
     }
   }
 }

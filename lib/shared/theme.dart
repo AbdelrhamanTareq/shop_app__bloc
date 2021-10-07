@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 final lightTheme = ThemeData(
   primaryColor: Colors.redAccent,
   primarySwatch: Colors.red,
-  accentColor: Colors.blueAccent,
+  accentColor: Colors.amber,
   brightness: Brightness.light,
   canvasColor: Colors.white,
   fontFamily: 'Cairo',

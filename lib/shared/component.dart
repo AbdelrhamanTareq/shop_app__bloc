@@ -59,3 +59,7 @@ void configLoading() {
     ..dismissOnTap = false;
   // ..customAnimation = CustomAnimation();
 }
+
+Center buildProgressIndicator() => Center(
+      child: CircularProgressIndicator(),
+    );
