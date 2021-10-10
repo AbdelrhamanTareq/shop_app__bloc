@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app_bloc/bloc/cuibts/home_cuibt.dart';
 import 'package:shop_app_bloc/screens/change_password_screen.dart';
 import 'package:shop_app_bloc/screens/edit_profile_screen.dart';
+import 'package:shop_app_bloc/screens/privacy_screen.dart';
 import 'package:shop_app_bloc/shared/component.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -28,7 +30,9 @@ class SettingScreen extends StatelessWidget {
                       navTo(context, ChangePasswordScreen());
                     },
                   ),
-                  buildIconListTile(context, 'Privacy', () {}),
+                  buildIconListTile(context, 'Privacy', () {
+                    navTo(context, PrivacyScreen());
+                  }),
                 ],
               ),
             ),
@@ -42,13 +46,12 @@ class SettingScreen extends StatelessWidget {
               child: Column(
                 children: [
                   buildSwitchListTile(
-                    context,
-                    'Notification',
-                  ),
+                      context, 'Dark Mode', HomeCubit.get(context).isDark,
+                      (state) {
+                    HomeCubit.get(context).darkMode(state);
+                  }),
                   buildSwitchListTile(
-                    context,
-                    'App notification',
-                  ),
+                      context, 'App notification', false, () {}),
                 ],
               ),
             ),
@@ -110,14 +113,14 @@ Padding buildHeading(String text, context, IconData icon) {
     child: Row(children: [
       Icon(
         icon,
-        color: Colors.black,
+        // color: Colors.black,
       ),
       SizedBox(width: 8),
       Container(
         child: Text(
           text,
           style: TextStyle(
-            color: Colors.black,
+            color: (Theme.of(context).dividerColor),
             fontSize: 16,
           ),
           textAlign: TextAlign.start,
@@ -128,15 +131,18 @@ Padding buildHeading(String text, context, IconData icon) {
   );
 }
 
-ListTile buildSwitchListTile(BuildContext context, String text) {
+ListTile buildSwitchListTile(
+    BuildContext context, String text, bool value, Function function) {
   return ListTile(
     leading: Text(
       text,
       style: TextStyle(color: Colors.grey),
     ),
     trailing: Switch(
-        value: true,
+        value: value,
         // CacheHelper.getMode('mode'),
-        onChanged: (state) {}),
+        onChanged: (state) {
+          function(state);
+        }),
   );
 }

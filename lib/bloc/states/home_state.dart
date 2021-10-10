@@ -53,7 +53,9 @@ class DeleteFavoriteSuccsesState extends HomeStates {}
 class DeleteFavoriteErrorState extends HomeStates {
   final String error;
   DeleteFavoriteErrorState(this.error);
-} 
+}
+
+class SwitchDarkMode extends HomeStates {}
 // class CategoryLoadingState extends HomeStates {}
 
 // class CategorySucsessState extends HomeStates {}

@@ -117,4 +117,17 @@ class AuthCuibt extends Cubit<AppAuthState> {
       emit(ChangePasswordErrorState(e.toString()));
     }
   }
+
+  Future logout() async {
+    emit(LogoutLoadingState());
+    try {
+      final response = await DioHelper.postData(
+          endPoint: 'logout', data: {"fcm_token": "SomeFmToken"}, token: token);
+      print(response.data);
+      emit(LogoutSuccuessState(response.data));
+    } catch (e) {
+      print(e.toString());
+      emit(LogoutErrorState(e.toString()));
+    }
+  }
 }

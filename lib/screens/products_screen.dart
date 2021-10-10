@@ -189,7 +189,9 @@ class ProductsScreen extends StatelessWidget {
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyText1!
-                                            .copyWith(color: Colors.black),
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .dividerColor),
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -202,9 +204,15 @@ class ProductsScreen extends StatelessWidget {
                                               child: Text(
                                                 '\$${_homeData.data!.products[i].oldPrice}',
                                                 style: TextStyle(
-                                                    decoration: TextDecoration
-                                                        .lineThrough,
-                                                    decorationThickness: 1.0),
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                  decorationThickness: 1.0,
+                                                  color: (Theme.of(context)
+                                                              .brightness ==
+                                                          Brightness.dark)
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                ),
                                               ),
                                             ),
                                       Expanded(

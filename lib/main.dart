@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shop_app_bloc/bloc/cuibts/auth_cuibt.dart';
 import 'package:shop_app_bloc/bloc/cuibts/category_cuibt.dart';
+import 'package:shop_app_bloc/bloc/states/home_state.dart';
 import 'package:shop_app_bloc/shared/bloc_observer.dart';
 
 import './helpers/dio_helper.dart';
@@ -52,17 +52,23 @@ class MyApp extends StatelessWidget {
         //   lazy: false,
         // ),
       ],
-      child: MaterialApp(
-        builder: EasyLoading.init(),
-        debugShowCheckedModeBanner: false,
-        theme: lightTheme,
-        home: _onBoarding
-            ? ((token != '') ? HomeScreen() : LoginScreen())
-            : OnBoardingScreen()
-        //  _onBoarding ? ((_token != null)) ? HomeScreen():
-        //  (_token != null) ? HomeScreen() : LoginScreen()
-        // _onBoarding ? HomeScreen() : OnBoardingScreen()
-        ,
+      child: BlocConsumer<HomeCubit, HomeStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'Shop App',
+            builder: EasyLoading.init(),
+            debugShowCheckedModeBanner: false,
+            theme: HomeCubit.get(context).isDark ? darkTheme : lightTheme,
+            home: _onBoarding
+                ? ((token != '') ? HomeScreen() : LoginScreen())
+                : OnBoardingScreen()
+            //  _onBoarding ? ((_token != null)) ? HomeScreen():
+            //  (_token != null) ? HomeScreen() : LoginScreen()
+            // _onBoarding ? HomeScreen() : OnBoardingScreen()
+            ,
+          );
+        },
       ),
     );
   }

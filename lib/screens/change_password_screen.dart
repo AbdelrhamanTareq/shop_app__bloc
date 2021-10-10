@@ -116,7 +116,7 @@ class ChangePasswordScreen extends StatelessWidget {
                         Container(
                           width: double.infinity,
                           height: 70,
-                          color: Theme.of(context).accentColor,
+                          color: Theme.of(context).primaryColor,
                           child: TextButton(
                             onPressed: () async {
                               _changePassword(context,

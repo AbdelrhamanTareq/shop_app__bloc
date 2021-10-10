@@ -20,8 +20,16 @@ class CacheHelper {
     return await _prefs.setString(key, value);
   }
 
+  static Future<bool> setPref(String key, bool value) async {
+    return await _prefs.setBool(key, value);
+  }
+
   static String? getToken(String key) {
     return _prefs.getString(key);
+  }
+
+  static bool? getPref(String key) {
+    return _prefs.getBool(key);
   }
 
   static Future<bool> deletePref(String key) async {

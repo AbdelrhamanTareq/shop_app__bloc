@@ -72,3 +72,16 @@ class ChangePasswordErrorState extends AppAuthState {
 
   ChangePasswordErrorState(this.error);
 }
+
+class LogoutLoadingState extends AppAuthState {}
+
+class LogoutSuccuessState extends AppAuthState {
+  final Map<String, dynamic> data;
+  LogoutSuccuessState(this.data);
+}
+
+class LogoutErrorState extends AppAuthState {
+  final String error;
+
+  LogoutErrorState(this.error);
+}

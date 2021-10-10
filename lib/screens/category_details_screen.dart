@@ -14,6 +14,8 @@ class CategoryDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _darkTheme = Theme.of(context).brightness == Brightness.dark;
+
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
         if (state is GetProductDetailsLoadingState) {
@@ -115,10 +117,12 @@ class CategoryDetailsScreen extends StatelessWidget {
                               ),
                               Text(
                                 _categoryDetailsData.data!.dataModel![i].name!,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1!
-                                    .copyWith(color: Colors.black),
+                                style: (_darkTheme)
+                                    ? Theme.of(context).textTheme.bodyText2!
+                                    : Theme.of(context)
+                                        .textTheme
+                                        .bodyText2!
+                                        .copyWith(color: Colors.black),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -129,12 +133,12 @@ class CategoryDetailsScreen extends StatelessWidget {
                                   : Padding(
                                       padding: const EdgeInsets.only(left: 8),
                                       child: Text(
-                                        '\$${_categoryDetailsData.data!.dataModel![i].oldPrice}',
-                                        style: TextStyle(
-                                            decoration:
-                                                TextDecoration.lineThrough,
-                                            decorationThickness: 1.0),
-                                      ),
+                                          '\$${_categoryDetailsData.data!.dataModel![i].oldPrice}',
+                                          style: TextStyle(
+                                              decoration:
+                                                  TextDecoration.lineThrough,
+                                              decorationThickness: 1.0,
+                                              color: Colors.white)),
                                     ),
                               Expanded(
                                 child: Align(

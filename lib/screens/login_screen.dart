@@ -134,7 +134,7 @@ class LoginScreen extends StatelessWidget {
                                     child: Text(
                                       'Login',
                                       style: TextStyle(
-                                          color: Theme.of(context).canvasColor),
+                                          color: Theme.of(context).buttonColor),
                                     ),
                                     onPressed: () {
                                       // _submit(context);

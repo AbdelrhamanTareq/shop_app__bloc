@@ -28,7 +28,9 @@ class CategoryScreen extends StatelessWidget {
           EasyLoading.dismiss();
         }
         return Container(
-          color: Colors.grey[100],
+          color: (Theme.of(context).brightness == Brightness.dark)
+              ? Colors.black
+              : Colors.grey[100],
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

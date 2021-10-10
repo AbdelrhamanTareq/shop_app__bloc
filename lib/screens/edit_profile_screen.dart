@@ -68,10 +68,10 @@ class EditProfileScreen extends StatelessWidget {
                           child: ClipOval(
                             child: Stack(
                               children: [
-                                // Image(
-                                //   image:
-                                //       NetworkImage(_profileData.data!.image!),
-                                // ),
+                                Image(
+                                  image:
+                                      NetworkImage(_profileData.data!.image!),
+                                ),
                                 Positioned(
                                   child: IconButton(
                                     padding: EdgeInsets.zero,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app_bloc/helpers/cache_helper.dart';
 import 'package:shop_app_bloc/models/category_details_model.dart';
 import 'package:shop_app_bloc/models/category_model.dart';
 import 'package:shop_app_bloc/models/change_favorite_model.dart';
@@ -166,6 +167,12 @@ class HomeCubit extends Cubit<HomeStates> {
       print(error.toString());
       emit(DeleteFavoriteErrorState(error.toString()));
     }
-    // addOrRemvoeFavorites(productId: productId);
+  }
+
+  bool isDark = CacheHelper.getPref('darkMode') ?? false;
+  void darkMode(bool state) {
+    isDark = state;
+    CacheHelper.setPref('darkMode', state);
+    emit(SwitchDarkMode());
   }
 }

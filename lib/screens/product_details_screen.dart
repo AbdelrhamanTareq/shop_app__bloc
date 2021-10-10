@@ -18,6 +18,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int _current = 0;
   @override
   Widget build(BuildContext context) {
+    final _darkTheme = Theme.of(context).brightness == Brightness.dark;
     final CarouselController _carouselController = CarouselController();
     return
         // BlocProvider(
@@ -28,7 +29,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       builder: (context, state) {
         final ProductModel? _productModel = HomeCubit.get(context).productModel;
         return Scaffold(
-          backgroundColor: Colors.grey[100],
+          backgroundColor: (_darkTheme) ? Colors.black : Colors.grey[100],
           body: (state is GetProductDetailsLoadingState)
               ? Center(
                   child: CircularProgressIndicator(),
@@ -127,6 +128,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     },
                                     icon: Icon(Icons.arrow_back_ios_new),
                                     iconSize: 20,
+                                    color: Colors.black,
                                   ),
                                 ),
                                 left: 10,
@@ -178,7 +180,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 _productModel.data!.name!,
                                 softWrap: true,
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: (_darkTheme)
+                                      ? Colors.white
+                                      : Colors.black,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
@@ -198,7 +202,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 Text(
                                   '\$${_productModel.data!.price!}',
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: (_darkTheme)
+                                        ? Colors.white
+                                        : Colors.black,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -214,17 +220,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         padding: EdgeInsets.all(15),
                         child: Text(
                           'Product Details',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline6!
-                              .copyWith(color: Colors.black),
+                          style: (_darkTheme)
+                              ? Theme.of(context).textTheme.headline6!
+                              : Theme.of(context)
+                                  .textTheme
+                                  .headline6!
+                                  .copyWith(color: Colors.black),
                         ),
                       ),
                       Padding(
                         padding:
                             EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         child: Text(_productModel.data!.description!,
-                            style: TextStyle(color: Colors.black)
+                            style: TextStyle(
+                                color:
+                                    (_darkTheme) ? Colors.white : Colors.black)
                             //     Theme.of(context).textTheme.headline6,
                             ),
                       ),

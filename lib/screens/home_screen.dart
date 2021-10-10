@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app_bloc/shared/drawer.dart';
 
 import '/bloc/cuibts/home_cuibt.dart';
 import '/bloc/states/home_state.dart';
@@ -15,13 +16,16 @@ class HomeScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text(
               'My Shop',
-              style: TextStyle(color: Colors.black),
             ),
             actions: [
               buildCartBadge(context),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.search),
+              ),
             ],
           ),
-          drawer: Drawer(),
+          drawer: AppDrawer(),
           bottomNavigationBar: BottomNavigationBar(
             items: [
               BottomNavigationBarItem(
@@ -60,12 +64,11 @@ class HomeScreen extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () {
-              // CategoryCubit.get(context).getCategoryData();
               HomeCubit.get(context).getFavoriteData();
             },
             icon: Icon(
               Icons.shopping_cart,
-              color: Theme.of(context).primaryColor,
+              // color: Theme.of(context).primaryColor,
             ),
           ),
           Positioned(

@@ -7,12 +7,17 @@ class FavoriteScreen extends StatelessWidget {
   // final UniqueKey _key = UniqueKey();
   @override
   Widget build(BuildContext context) {
+    final _darkTheme = Theme.of(context).brightness == Brightness.dark;
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {},
       builder: (context, state) {
         final _favoriteData = HomeCubit.get(context).favoriteModel;
         if (state is GetFavoriteLoadingState || _favoriteData == null) {
           return Center(child: CircularProgressIndicator());
+        } else if (HomeCubit.get(context).favorites.isEmpty) {
+          return Center(
+            child: Text('No favorite yet! Add some'),
+          );
         }
         return Padding(
           padding: EdgeInsets.all(10),
@@ -39,45 +44,51 @@ class FavoriteScreen extends StatelessWidget {
                         HomeCubit.get(context).getHomeData();
                       });
                     },
-                    child: InkWell(
-                      onTap: () {},
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 120,
-                            height: 120,
-                            child: Image.network(
-                              _favoriteData
-                                  .data!.dataModel![i].products!.image!,
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                              height: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: InkWell(
+                        onTap: () {},
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 120,
+                              height: 120,
+                              child: Image.network(
+                                _favoriteData
+                                    .data!.dataModel![i].products!.image!,
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 200,
-                                child: Text(
-                                  _favoriteData
-                                      .data!.dataModel![i].products!.name!,
-                                  style: TextStyle(color: Colors.black),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: 200,
+                                  child: Text(
+                                    _favoriteData
+                                        .data!.dataModel![i].products!.name!,
+                                    style: TextStyle(
+                                        color: (_darkTheme)
+                                            ? Colors.white
+                                            : Colors.black),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 15),
-                              Text(
-                                '\$ ${_favoriteData.data!.dataModel![i].products!.price!}',
-                                style: Theme.of(context).textTheme.bodyText1,
-                              ),
-                            ],
-                          ),
-                        ],
+                                SizedBox(height: 15),
+                                Text(
+                                  '\$ ${_favoriteData.data!.dataModel![i].products!.price!}',
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
