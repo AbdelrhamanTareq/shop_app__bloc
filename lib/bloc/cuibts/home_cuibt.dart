@@ -1,13 +1,16 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app_bloc/helpers/cache_helper.dart';
 import 'package:shop_app_bloc/models/category_details_model.dart';
 import 'package:shop_app_bloc/models/category_model.dart';
 import 'package:shop_app_bloc/models/change_favorite_model.dart';
 import 'package:shop_app_bloc/models/favorite_model.dart';
 import 'package:shop_app_bloc/models/product_details_model.dart';
+import 'package:shop_app_bloc/models/seacrh_model.dart';
 import 'package:shop_app_bloc/shared/component.dart';
 
 import '/bloc/states/home_state.dart';
@@ -43,9 +46,31 @@ class HomeCubit extends Cubit<HomeStates> {
       });
 
       emit(HomeSuccsesState());
-    } catch (error) {
-      print(error.toString());
-      emit(HomeErorrState(error.toString()));
+    } on DioError catch (e) {
+      if (DioErrorType.connectTimeout == e.type ||
+          DioErrorType.receiveTimeout == e.type) {
+        print('dsfsdfsdfaerwrewrfskdfsdf');
+      } else {
+        Fluttertoast.showToast(
+            msg: 'Check your connection',
+            backgroundColor: Colors.red,
+            toastLength: Toast.LENGTH_LONG);
+      }
+      //     if (DioErrorType. == e.type ||
+      //     DioErrorType.CONNECT_TIMEOUT == e.type) {
+      //   throw CommunicationTimeoutException(
+      //       "Server is not reachable. Please verify your internet connection and try again");
+      // } else if (DioErrorType.RESPONSE == e.type) {
+      //   // 4xx 5xx response
+      //   // throw exception...
+      // } else if (DioErrorType.DEFAULT == e.type) {
+      //      if (e.message.contains('SocketException')) {
+      //        throw CommunicationTimeoutException('blabla');
+      //      }
+      // } else {
+      //       throw CommunicationException("Problem connecting to the server. Please try again.");
+      print(e.toString());
+      emit(HomeErorrState(e.toString()));
     }
     return homeModel;
   }
@@ -174,5 +199,22 @@ class HomeCubit extends Cubit<HomeStates> {
     isDark = state;
     CacheHelper.setPref('darkMode', state);
     emit(SwitchDarkMode());
+  }
+
+  SeacrhModel? seacrhModel;
+  Future<SeacrhModel?> search(String text) async {
+    emit(SearchLoadingState());
+    try {
+      final response = await DioHelper.postData(
+          endPoint: 'products/search', data: {'text': text});
+      seacrhModel = SeacrhModel.fromJson(response.data);
+      print('xxxxxxxxx  ${seacrhModel!.data!.dataModel[0].images}');
+
+      emit(SearchSuccsesState());
+    } catch (error) {
+      print(error.toString());
+      emit(SearchErrorState(error.toString()));
+    }
+    return seacrhModel;
   }
 }

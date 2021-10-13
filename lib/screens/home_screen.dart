@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app_bloc/screens/search_screen.dart';
+import 'package:shop_app_bloc/shared/component.dart';
 import 'package:shop_app_bloc/shared/drawer.dart';
 
 import '/bloc/cuibts/home_cuibt.dart';
@@ -20,7 +22,10 @@ class HomeScreen extends StatelessWidget {
             actions: [
               buildCartBadge(context),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  // HomeCubit.get(context).search();
+                  navTo(context, SearchScreen());
+                },
                 icon: Icon(Icons.search),
               ),
             ],

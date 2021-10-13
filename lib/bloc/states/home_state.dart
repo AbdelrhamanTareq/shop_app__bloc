@@ -56,6 +56,15 @@ class DeleteFavoriteErrorState extends HomeStates {
 }
 
 class SwitchDarkMode extends HomeStates {}
+
+class SearchLoadingState extends HomeStates {}
+
+class SearchSuccsesState extends HomeStates {}
+
+class SearchErrorState extends HomeStates {
+  final String error;
+  SearchErrorState(this.error);
+}
 // class CategoryLoadingState extends HomeStates {}
 
 // class CategorySucsessState extends HomeStates {}

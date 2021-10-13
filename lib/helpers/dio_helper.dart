@@ -6,7 +6,12 @@ class DioHelper {
   static late final Dio _dio;
 
   static init() async {
-    _dio = Dio();
+    _dio = Dio(
+        // BaseOptions(
+        //   connectTimeout: 5000,
+        //   receiveTimeout: 3000,
+        // ),
+        );
   }
 
   static Future<Response> postData(
@@ -50,4 +55,15 @@ class DioHelper {
             headers: {'Authorization': token, 'lang': 'en'}),
         data: data);
   }
+
+  // static Future<Response> search() async {
+  //   return await _dio.post(
+  //     'https://student.valuxapps.com/api/products/search',
+  //     data: {"text": "phone"},
+  //     options: Options(
+  //         receiveDataWhenStatusError: true,
+  //         contentType: 'application/json',
+  //         headers: {'Authorization': token, 'lang': 'en'}),
+  //   );
+  // }
 }

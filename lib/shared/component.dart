@@ -26,6 +26,7 @@ TextFormField buildTextFiled({
   required TextInputType keyboardType,
   bool obscureText = false,
   Widget? suffixIcon,
+  void Function(String? val)? onFieldSubmittedFunction,
 }) {
   return TextFormField(
     controller: controller,
@@ -40,6 +41,7 @@ TextFormField buildTextFiled({
     ),
     validator: validatorFunction,
     obscureText: obscureText,
+    onFieldSubmitted: onFieldSubmittedFunction,
   );
 }
 
