@@ -62,6 +62,8 @@ void configLoading() {
   // ..customAnimation = CustomAnimation();
 }
 
-Center buildProgressIndicator() => Center(
-      child: CircularProgressIndicator(),
+Center buildProgressIndicator({bool isMainColor = true}) => Center(
+      child: CircularProgressIndicator(
+        color: isMainColor ? Colors.redAccent : Colors.amber,
+      ),
     );

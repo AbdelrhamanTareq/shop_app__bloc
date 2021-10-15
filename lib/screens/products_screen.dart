@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:shop_app_bloc/bloc/states/category_states.dart';
 
 import '/screens/product_details_screen.dart';
 import '/shared/component.dart';
@@ -14,13 +13,14 @@ import '/models/home_model.dart';
 class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _darkTheme = Theme.of(context).brightness == Brightness.dark;
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {},
       builder: (context, state) {
         final HomeModel? _homeData = HomeCubit.get(context).homeModel;
 
         // print(_homeData!.data);
-        if (state is CategoryDetailsSucsessState) {
+        if (state is GetCategoryDetailsSuccsesState) {
           EasyLoading.show();
         }
         //  else if (state is GetProductDetailSuccsesState) {
@@ -257,7 +257,9 @@ class ProductsScreen extends StatelessWidget {
                                                             false)
                                                         ? Theme.of(context)
                                                             .primaryColor
-                                                        : Colors.black,
+                                                        : (_darkTheme
+                                                            ? Colors.white
+                                                            : Colors.black),
                                                   ),
                                                 ),
                                               ],

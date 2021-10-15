@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// final darkTheme = Theme.of(context).brightness == Brightness.dark;
+
 final lightTheme = ThemeData(
   primaryColor: Colors.redAccent,
   primarySwatch: Colors.red,

@@ -7,6 +7,7 @@ import 'package:shop_app_bloc/shared/drawer.dart';
 
 import '/bloc/cuibts/home_cuibt.dart';
 import '/bloc/states/home_state.dart';
+import 'cart_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -14,6 +15,7 @@ class HomeScreen extends StatelessWidget {
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {},
       builder: (context, state) {
+        // final cartData = HomeCubit.get(context).cartModel;
         return Scaffold(
           appBar: AppBar(
             title: Text(
@@ -63,13 +65,14 @@ class HomeScreen extends StatelessWidget {
   }
 
   Padding buildCartBadge(context) {
+    final data = HomeCubit.get(context).cartModel;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
       child: Stack(
         children: [
           IconButton(
             onPressed: () {
-              HomeCubit.get(context).getFavoriteData();
+              navTo(context, CartScreen());
             },
             icon: Icon(
               Icons.shopping_cart,
@@ -90,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                 minHeight: 12,
               ),
               child: Text(
-                '0',
+                '${(data == null) ? 0 : HomeCubit.get(context).cartModel!.data!.cartItem!.length}',
                 style: TextStyle(color: Colors.white, fontSize: 8),
                 textAlign: TextAlign.center,
               ),

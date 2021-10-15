@@ -124,7 +124,7 @@ class ChangePasswordScreen extends StatelessWidget {
                                   newPass: _newPassController.text);
                             },
                             child: (state is ChangePasswordLoadingState)
-                                ? buildProgressIndicator()
+                                ? buildProgressIndicator(isMainColor: false)
                                 : Text(
                                     'Change Password',
                                     style: TextStyle(color: Colors.white),

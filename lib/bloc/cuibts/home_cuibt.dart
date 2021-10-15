@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app_bloc/helpers/cache_helper.dart';
+import 'package:shop_app_bloc/models/cart_model.dart';
 import 'package:shop_app_bloc/models/category_details_model.dart';
 import 'package:shop_app_bloc/models/category_model.dart';
 import 'package:shop_app_bloc/models/change_favorite_model.dart';
@@ -29,6 +30,7 @@ class HomeCubit extends Cubit<HomeStates> {
   HomeModel? homeModel;
 
   Map<int, bool> favorites = {};
+  Map<int, bool> inCart = {};
   Future<HomeModel?> getHomeData() async {
     emit(HomeLoadingState());
 
@@ -43,6 +45,9 @@ class HomeCubit extends Cubit<HomeStates> {
 
       homeModel!.data!.products.forEach((element) {
         favorites.addAll({element.id!: element.inFavorites!});
+      });
+      homeModel!.data!.products.forEach((element) {
+        inCart.addAll({element.id!: element.inCart!});
       });
 
       emit(HomeSuccsesState());
@@ -216,5 +221,69 @@ class HomeCubit extends Cubit<HomeStates> {
       emit(SearchErrorState(error.toString()));
     }
     return seacrhModel;
+  }
+
+  CartModel? cartModel;
+  Future<CartModel?> getCartData() async {
+    emit(GetCartDataLoadingState());
+    try {
+      final response = await DioHelper.getData(endPoint: 'carts');
+      cartModel = CartModel.fromJson(response.data);
+      print('xyxyxyxyx  ${cartModel!.data!.cartItem!.length}');
+
+      emit(GetCartDataSuccsesState());
+    } catch (error) {
+      print(error.toString());
+      emit(GetCartDataErrorState(error.toString()));
+    }
+    return cartModel;
+  }
+
+  Future addOrRemvoeCart({required int productId}) async {
+    inCart[productId] = !inCart[productId]!;
+    emit(AddOrRemoveCartLoadingState());
+    try {
+      final response = await DioHelper.postData(
+        endPoint: 'carts',
+        data: {
+          'product_id': productId,
+        },
+        token: token,
+      );
+      // changeFavoriteModel = ChangeFavorite.fromJson(response.data);
+      print(response.data);
+
+      if (!response.data['status']) {
+        inCart[productId] = !inCart[productId]!;
+      }
+      print(inCart);
+      getCartData();
+
+      emit(AddOrRemoveCartSuccsesState(response.data));
+    } catch (error) {
+      print(error.toString());
+      emit(AddOrRemoveCartErrorState(error.toString()));
+    }
+  }
+
+  Future updateCart({required int productId, required int quantity}) async {
+    // emit(AddOrRemoveCartLoadingState());
+    try {
+      final response = await DioHelper.updateData(
+        endPoint: 'carts/$productId',
+        data: {
+          'quantity': quantity,
+        },
+      );
+      // changeFavoriteModel = ChangeFavorite.fromJson(response.data);
+      print(response.data);
+
+      getCartData();
+
+      // emit(AddOrRemoveCartSuccsesState(response.data));
+    } catch (error) {
+      print(error.toString());
+      // emit(AddOrRemoveCartErrorState(error.toString()));
+    }
   }
 }

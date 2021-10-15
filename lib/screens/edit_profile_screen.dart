@@ -154,7 +154,7 @@ class EditProfileScreen extends StatelessWidget {
                               );
                             },
                             child: (state is EditProfileLoadingState)
-                                ? buildProgressIndicator()
+                                ? buildProgressIndicator(isMainColor: false)
                                 : Text(
                                     'Edit',
                                     style: TextStyle(color: Colors.white),

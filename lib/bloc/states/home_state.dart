@@ -65,8 +65,24 @@ class SearchErrorState extends HomeStates {
   final String error;
   SearchErrorState(this.error);
 }
-// class CategoryLoadingState extends HomeStates {}
 
-// class CategorySucsessState extends HomeStates {}
+class GetCartDataLoadingState extends HomeStates {}
 
-// class CategoryErorrState extends HomeStates {}
+class GetCartDataSuccsesState extends HomeStates {}
+
+class GetCartDataErrorState extends HomeStates {
+  final String error;
+  GetCartDataErrorState(this.error);
+}
+
+class AddOrRemoveCartLoadingState extends HomeStates {}
+
+class AddOrRemoveCartSuccsesState extends HomeStates {
+  final Map<String, dynamic> data;
+  AddOrRemoveCartSuccsesState(this.data);
+}
+
+class AddOrRemoveCartErrorState extends HomeStates {
+  final String error;
+  AddOrRemoveCartErrorState(this.error);
+}

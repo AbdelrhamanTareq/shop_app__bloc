@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shop_app_bloc/bloc/cuibts/auth_cuibt.dart';
-import 'package:shop_app_bloc/bloc/cuibts/category_cuibt.dart';
 import 'package:shop_app_bloc/bloc/states/home_state.dart';
 import 'package:shop_app_bloc/shared/bloc_observer.dart';
 
@@ -40,7 +39,8 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => HomeCubit()
             ..getCategoryData()
             ..getHomeData()
-            ..getFavoriteData(),
+            ..getFavoriteData()
+            ..getCartData(),
           lazy: false,
         ),
         BlocProvider(

@@ -2,9 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app_bloc/bloc/cuibts/home_cuibt.dart';
 import 'package:shop_app_bloc/bloc/states/home_state.dart';
 import 'package:shop_app_bloc/models/product_details_model.dart';
+import 'package:shop_app_bloc/shared/component.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   late final int productId;
@@ -25,7 +27,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         //   create: (context) => HomeCubit()..getProductDetails(productId),
         //   child:
         BlocConsumer<HomeCubit, HomeStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is AddOrRemoveCartSuccsesState) {
+          Fluttertoast.showToast(
+              msg: state.data['message'], backgroundColor: Colors.green);
+        }
+      },
       builder: (context, state) {
         final ProductModel? _productModel = HomeCubit.get(context).productModel;
         return Scaffold(
@@ -247,13 +254,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           width: double.infinity,
                           height: 60,
                           color: Theme.of(context).primaryColor,
-                          child: TextButton(
-                            child: Text(
-                              'ADD TO CART',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            onPressed: () {},
-                          ),
+                          child: (state is AddOrRemoveCartLoadingState)
+                              ? buildProgressIndicator(isMainColor: false)
+                              : TextButton(
+                                  child: Text(
+                                    'ADD TO CART',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  onPressed: () {
+                                    HomeCubit.get(context).addOrRemvoeCart(
+                                        productId: _productModel.data!.id!);
+                                  },
+                                ),
                         ),
                       ),
                     ],

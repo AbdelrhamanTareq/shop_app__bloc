@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:shop_app_bloc/bloc/cuibts/category_cuibt.dart';
 import 'package:shop_app_bloc/bloc/cuibts/home_cuibt.dart';
-import 'package:shop_app_bloc/bloc/states/category_states.dart';
 import 'package:shop_app_bloc/bloc/states/home_state.dart';
 import 'package:shop_app_bloc/screens/category_details_screen.dart';
 import 'package:shop_app_bloc/shared/component.dart';
