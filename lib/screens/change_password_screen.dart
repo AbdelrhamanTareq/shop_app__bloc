@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shop_app_bloc/bloc/cuibts/auth_cuibt.dart';
-import 'package:shop_app_bloc/bloc/states/auth_state.dart';
-import 'package:shop_app_bloc/shared/component.dart';
+
+import '/bloc/cuibts/auth_cuibt.dart';
+import '/bloc/states/auth_state.dart';
+import '/shared/component.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   var _passController = TextEditingController();

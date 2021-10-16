@@ -1,19 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shop_app_bloc/helpers/cache_helper.dart';
-import 'package:shop_app_bloc/models/cart_model.dart';
-import 'package:shop_app_bloc/models/category_details_model.dart';
-import 'package:shop_app_bloc/models/category_model.dart';
-import 'package:shop_app_bloc/models/change_favorite_model.dart';
-import 'package:shop_app_bloc/models/favorite_model.dart';
-import 'package:shop_app_bloc/models/product_details_model.dart';
-import 'package:shop_app_bloc/models/seacrh_model.dart';
-import 'package:shop_app_bloc/shared/component.dart';
 
+import '/helpers/cache_helper.dart';
+import '/models/cart_model.dart';
+import '/models/category_details_model.dart';
+import '/models/category_model.dart';
+import '/models/change_favorite_model.dart';
+import '/models/favorite_model.dart';
+import '/models/product_details_model.dart';
+import '/models/seacrh_model.dart';
+import '/shared/component.dart';
 import '/bloc/states/home_state.dart';
 import '/helpers/dio_helper.dart';
 import '/models/home_model.dart';

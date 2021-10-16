@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:shop_app_bloc/bloc/cuibts/home_cuibt.dart';
-import 'package:shop_app_bloc/bloc/states/home_state.dart';
-import 'package:shop_app_bloc/screens/category_details_screen.dart';
-import 'package:shop_app_bloc/shared/component.dart';
+
+import '/bloc/cuibts/home_cuibt.dart';
+import '/bloc/states/home_state.dart';
+import '/screens/category_details_screen.dart';
+import '/shared/component.dart';
 
 class CategoryScreen extends StatelessWidget {
   @override

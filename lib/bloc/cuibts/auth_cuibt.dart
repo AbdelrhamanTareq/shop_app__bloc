@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app_bloc/models/profile_model.dart';
-import 'package:shop_app_bloc/shared/component.dart';
 
+import '/models/profile_model.dart';
+import '/shared/component.dart';
 import '/bloc/states/auth_state.dart';
 import '/helpers/cache_helper.dart';
 import '/helpers/dio_helper.dart';

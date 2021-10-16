@@ -1,17 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:shop_app_bloc/shared/component.dart';
+
+import '/shared/component.dart';
 
 class DioHelper {
   static final url = 'https://student.valuxapps.com/api/';
   static late final Dio _dio;
 
   static init() async {
-    _dio = Dio(
-        // BaseOptions(
-        //   connectTimeout: 5000,
-        //   receiveTimeout: 3000,
-        // ),
-        );
+    _dio = Dio();
   }
 
   static Future<Response> postData(

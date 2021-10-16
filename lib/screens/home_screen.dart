@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app_bloc/screens/search_screen.dart';
-import 'package:shop_app_bloc/shared/component.dart';
-import 'package:shop_app_bloc/shared/drawer.dart';
 
+import '/screens/search_screen.dart';
+import '/shared/component.dart';
+import '/shared/drawer.dart';
 import '/bloc/cuibts/home_cuibt.dart';
 import '/bloc/states/home_state.dart';
 import 'cart_screen.dart';

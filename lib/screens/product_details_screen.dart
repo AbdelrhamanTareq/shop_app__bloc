@@ -1,12 +1,14 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shop_app_bloc/bloc/cuibts/home_cuibt.dart';
-import 'package:shop_app_bloc/bloc/states/home_state.dart';
-import 'package:shop_app_bloc/models/product_details_model.dart';
-import 'package:shop_app_bloc/shared/component.dart';
+
+import '/bloc/cuibts/home_cuibt.dart';
+import '/bloc/states/home_state.dart';
+import '/models/product_details_model.dart';
+import '/shared/component.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   late final int productId;

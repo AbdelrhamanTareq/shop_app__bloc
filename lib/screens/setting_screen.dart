@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app_bloc/bloc/cuibts/home_cuibt.dart';
-import 'package:shop_app_bloc/screens/change_password_screen.dart';
-import 'package:shop_app_bloc/screens/edit_profile_screen.dart';
-import 'package:shop_app_bloc/screens/privacy_screen.dart';
-import 'package:shop_app_bloc/shared/component.dart';
+
+import '/bloc/cuibts/home_cuibt.dart';
+import '/screens/change_password_screen.dart';
+import '/screens/edit_profile_screen.dart';
+import '/screens/privacy_screen.dart';
+import '/shared/component.dart';
 
 class SettingScreen extends StatelessWidget {
   @override
