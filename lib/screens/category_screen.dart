@@ -15,18 +15,12 @@ class CategoryScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         final _categoreyModel = HomeCubit.get(context).categoreyModel;
-        // if (state is CategoryLoadingState) {
-        //   return Center(
-        //     child: CircularProgressIndicator(),
-        //   );
-        // }
+
         if (state is GetCategoryDetailsLoadingState) {
           print(state);
           EasyLoading.show();
-        } else if (state is GetCategoryDetailsSuccsesState) {
-          print(state);
-          EasyLoading.dismiss();
         }
+
         return Container(
           color: (Theme.of(context).brightness == Brightness.dark)
               ? Colors.black
@@ -52,12 +46,11 @@ class CategoryScreen extends StatelessWidget {
                           .getCategoryDetails(
                               _categoreyModel!.data!.dataModel![i].id!)
                           .then((value) {
-                        if (state is GetCategoryDetailsSuccsesState) {
-                          navTo(
-                              context,
-                              CategoryDetailsScreen(
-                                  _categoreyModel.data!.dataModel![i].name!));
-                        }
+                        navTo(
+                            context,
+                            CategoryDetailsScreen(
+                                _categoreyModel.data!.dataModel![i].name!));
+                        EasyLoading.dismiss();
                       });
                     },
                     child: Container(

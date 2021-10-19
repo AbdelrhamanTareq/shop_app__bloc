@@ -20,7 +20,7 @@ class ProductsScreen extends StatelessWidget {
         final HomeModel? _homeData = HomeCubit.get(context).homeModel;
 
         // print(_homeData!.data);
-        if (state is GetCategoryDetailsSuccsesState) {
+        if (state is GetProductDetailsLoadingState) {
           EasyLoading.show();
         }
         //  else if (state is GetProductDetailSuccsesState) {
@@ -84,53 +84,16 @@ class ProductsScreen extends StatelessWidget {
                           ),
                           itemBuilder: (ctx, i) => InkWell(
                                 onTap: () {
-                                  print('stateeee $state');
                                   HomeCubit.get(context)
                                       .getProductDetails(
                                           _homeData.data!.products[i].id)
                                       .then((value) {
-                                    print('stateeee1 $state');
-                                    if (state is GetProductDetailSuccsesState) {
-                                      navTo(
-                                          context,
-                                          ProductDetailsScreen(
-                                              _homeData.data!.products[i].id!));
-                                    }
+                                    navTo(
+                                        context,
+                                        ProductDetailsScreen(
+                                            _homeData.data!.products[i].id!));
+                                    EasyLoading.dismiss();
                                   });
-                                  // .then((value) => EasyLoading.dismiss());
-
-                                  // EasyLoading().
-                                  // SplashScreen.navigate(
-                                  //     until: () async {
-                                  //       await HomeCubit.get(context)
-                                  //           .getProductDetails(_homeData
-                                  //               .data!.products[i].id!);
-                                  //     },
-                                  //     name: 'name',
-                                  //     next: (_) => ProductDetailsScreen(
-                                  //         _homeData.data!.products[i].id!));
-
-                                  // SplashScreen.callback(
-                                  // until: () async {
-                                  //   await HomeCubit.get(context)
-                                  //       .getProductDetails(_homeData
-                                  //           .data!.products[i].id!);
-                                  // },
-                                  //     name: 'dfgdfg',
-                                  //     onSuccess: (s) {
-                                  //       navTo(
-                                  //           context,
-                                  //           ProductDetailsScreen(_homeData
-                                  //               .data!.products[i].id!));
-                                  //     },
-                                  //     onError: (e, s) {
-                                  //       print(e);
-                                  //       print(s);
-                                  //     });
-                                  // navTo(
-                                  //     context,
-                                  //     ProductDetailsScreen(
-                                  //         _homeData.data!.products[i].id!));
                                 },
                                 child: Container(
                                   // color: Colors.grey,

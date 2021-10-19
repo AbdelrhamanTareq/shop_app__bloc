@@ -19,8 +19,6 @@ class CategoryDetailsScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is GetProductDetailsLoadingState) {
           EasyLoading.show();
-        } else if (state is GetProductDetailSuccsesState) {
-          EasyLoading.dismiss();
         }
       },
       builder: (context, state) {
@@ -51,21 +49,15 @@ class CategoryDetailsScreen extends StatelessWidget {
                       padding: EdgeInsets.all(10),
                       child: InkWell(
                         onTap: () {
-                          print('state1 $state');
                           HomeCubit.get(context)
                               .getProductDetails(
                                   _categoryDetailsData.data!.dataModel![i].id)
                               .then((value) {
-                            // print('سليلسيل');
-                            print('state $state');
-
-                            if (state is GetProductDetailSuccsesState) {
-                              navTo(
-                                  context,
-                                  ProductDetailsScreen(_categoryDetailsData
-                                      .data!.dataModel![i].id!));
-                              print('asdasdasdasdasdasd');
-                            }
+                            navTo(
+                                context,
+                                ProductDetailsScreen(_categoryDetailsData
+                                    .data!.dataModel![i].id!));
+                            EasyLoading.dismiss();
                           });
                         },
                         child: Container(
