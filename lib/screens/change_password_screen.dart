@@ -114,24 +114,17 @@ class ChangePasswordScreen extends StatelessWidget {
                         SizedBox(
                           height: 20,
                         ),
-                        Container(
-                          width: double.infinity,
-                          height: 70,
-                          color: Theme.of(context).primaryColor,
-                          child: TextButton(
-                            onPressed: () async {
-                              _changePassword(context,
-                                  oldPass: _passController.text,
-                                  newPass: _newPassController.text);
-                            },
-                            child: (state is ChangePasswordLoadingState)
-                                ? buildProgressIndicator(isMainColor: false)
-                                : Text(
-                                    'Change Password',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
+                        buildButton(
+                          context,
+                          function: () => _changePassword(
+                            context,
+                            oldPass: _passController.text,
+                            newPass: _newPassController.text,
                           ),
-                        )
+                          child: (state is ChangePasswordLoadingState)
+                              ? buildProgressIndicator(isMainColor: false)
+                              : buildButtonText(text: 'Change Password'),
+                        ),
                       ],
                     ),
                   ),

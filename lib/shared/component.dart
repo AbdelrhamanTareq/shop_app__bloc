@@ -67,3 +67,46 @@ Center buildProgressIndicator({bool isMainColor = true}) => Center(
         color: isMainColor ? Colors.redAccent : Colors.amber,
       ),
     );
+
+Container buildButton(context,
+        {required Function function, required Widget child}) =>
+    Container(
+      width: double.infinity,
+      height: 70,
+      color: Theme.of(context).primaryColor,
+      child: TextButton(
+          onPressed: () async {
+            function();
+          },
+          child: child
+          //  (state is EditProfileLoadingState)
+          //     ? buildProgressIndicator(isMainColor: false)
+          //     : Text(
+          //         'Edit',
+          //         style: TextStyle(color: Colors.white),
+          //       ),
+          ),
+    );
+Text buildButtonText({required String text}) => Text(
+      text,
+      style: TextStyle(color: Colors.white),
+    );
+
+    // Container(
+    //                       width: double.infinity,
+    //                       height: 70,
+    //                       color: Theme.of(context).primaryColor,
+    //                       child: TextButton(
+    //                         onPressed: () async {
+    //                           _changePassword(context,
+    //                               oldPass: _passController.text,
+    //                               newPass: _newPassController.text);
+    //                         },
+    //                         child: (state is ChangePasswordLoadingState)
+    //                             ? buildProgressIndicator(isMainColor: false)
+    //                             : Text(
+    //                                 'Change Password',
+    //                                 style: TextStyle(color: Colors.white),
+    //                               ),
+    //                       ),
+    //                     )

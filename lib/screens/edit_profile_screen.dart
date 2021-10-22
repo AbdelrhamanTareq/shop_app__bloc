@@ -140,26 +140,17 @@ class EditProfileScreen extends StatelessWidget {
                         SizedBox(
                           height: 20,
                         ),
-                        Container(
-                          width: double.infinity,
-                          height: 70,
-                          color: Theme.of(context).primaryColor,
-                          child: TextButton(
-                            onPressed: () async {
-                              _edit(
-                                context,
-                                email: _emailController.text,
-                                username: _nameController.text,
-                                phone: _phoneController.text,
-                              );
-                            },
-                            child: (state is EditProfileLoadingState)
-                                ? buildProgressIndicator(isMainColor: false)
-                                : Text(
-                                    'Edit',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
+                        buildButton(
+                          context,
+                          function: () => _edit(
+                            context,
+                            email: _emailController.text,
+                            username: _nameController.text,
+                            phone: _phoneController.text,
                           ),
+                          child: (state is EditProfileLoadingState)
+                              ? buildProgressIndicator(isMainColor: false)
+                              : buildButtonText(text: 'Edit'),
                         ),
                       ],
                     ),

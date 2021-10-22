@@ -149,21 +149,12 @@ class CartScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(12.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 50,
-                        color: Theme.of(context).primaryColor,
-                        child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Checkout',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
+                      child: buildButton(
+                        context,
+                        function: () {},
+                        child: buildButtonText(text: 'Checkout'),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

@@ -137,9 +137,7 @@ class LoginScreen extends StatelessWidget {
                                           color: Theme.of(context).buttonColor),
                                     ),
                                     onPressed: () {
-                                      // _submit(context);
                                       _submit(context);
-                                      print('submit');
                                     },
                                   ),
                                 ),
