@@ -19,6 +19,9 @@ class CategoryScreen extends StatelessWidget {
         if (state is GetCategoryDetailsLoadingState) {
           print(state);
           EasyLoading.show();
+        } else if (_categoreyModel == null ||
+            state is GetCategoryLoadingState) {
+          return buildProgressIndicator();
         }
 
         return Container(

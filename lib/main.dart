@@ -15,6 +15,7 @@ import '/screens/home_screen.dart';
 import '/shared/component.dart';
 import '/shared/theme.dart';
 
+//AIzaSyAYn6QIqi6Skqpwy7AOs9K8X3uTRmgTGdk map api
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
@@ -36,26 +37,32 @@ class MyApp extends StatelessWidget {
     print(token);
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (BuildContext context) => HomeCubit()
-            ..getCategoryData()
+        BlocProvider<HomeCubit>.value(
+          value: HomeCubit()
             ..getHomeData()
-            ..getFavoriteData()
-            ..getCartData(),
-          lazy: false,
+            ..dummyFuckingFunction()
+            ..getCategoryData()
+            ..getCartData()
+            ..getFavoriteData(),
         ),
+        // BlocProvider(
+        //   create: (BuildContext context) => HomeCubit()
+        //     // ..getCategoryData()
+        //     ..getHomeData()
+        //   // ..getFavoriteData()
+        //   // ..getCartData()
+        //   ,
+        //   lazy: false,
+        // ),
         BlocProvider(
           create: (BuildContext context) => AuthCuibt()..getProfileData(),
           lazy: false,
         ),
-        // BlocProvider(
-        //   create: (context) => CategoryCubit()..getCategoryData(),
-        //   lazy: false,
-        // ),
       ],
       child: BlocConsumer<HomeCubit, HomeStates>(
         listener: (context, state) {},
         builder: (context, state) {
+          print('dummy ${HomeCubit.get(context).dummy}');
           return MaterialApp(
             title: 'Shop App',
             builder: EasyLoading.init(),

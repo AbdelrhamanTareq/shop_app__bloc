@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app_bloc/screens/map_screen.dart';
 
 import '/bloc/cuibts/auth_cuibt.dart';
 import '/bloc/states/auth_state.dart';
@@ -9,6 +10,7 @@ class EditProfileScreen extends StatelessWidget {
   var _emailController = TextEditingController();
   var _nameController = TextEditingController();
   var _phoneController = TextEditingController();
+  var _mapController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   // var _emailController = TextEditingController();
 
@@ -36,7 +38,7 @@ class EditProfileScreen extends StatelessWidget {
         _emailController.text = _profileData!.data!.email!;
         _nameController.text = _profileData.data!.name!;
         _phoneController.text = _profileData.data!.phone!;
-        if (state is GetProfileLoadingState) {
+        if (state is GetProfileLoadingState || _profileData == null) {
           return buildProgressIndicator();
         }
         return Scaffold(
@@ -136,6 +138,32 @@ class EditProfileScreen extends StatelessWidget {
                             return null;
                           },
                           keyboardType: TextInputType.emailAddress,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        buildTextFiled(
+                          controller: _mapController,
+                          hintText: 'Address',
+                          preixIcon: Icon(Icons.place),
+                          validatorFunction: (String? val) {
+                            if (val!.length < 6) {
+                              return 'Address too short';
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.streetAddress,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        buildButton(
+                          context,
+                          function: () => navTo(
+                            context,
+                            MapScreen(),
+                          ),
+                          child: buildButtonText(text: 'Map'),
                         ),
                         SizedBox(
                           height: 20,

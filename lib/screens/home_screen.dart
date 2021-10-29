@@ -21,10 +21,11 @@ class HomeScreen extends StatelessWidget {
               'My Shop',
             ),
             actions: [
-              buildCartBadge(context),
+              buildCartBadge(
+                context,
+              ),
               IconButton(
                 onPressed: () {
-                  // HomeCubit.get(context).search();
                   navTo(context, SearchScreen());
                 },
                 icon: Icon(Icons.search),
@@ -63,8 +64,12 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Padding buildCartBadge(context) {
-    final data = HomeCubit.get(context).cartModel;
+  Widget buildCartBadge(
+    context,
+  ) {
+    final _data = HomeCubit.get(context).cartModel;
+
+    // final data = HomeCubit.get(context).cartModel;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
       child: Stack(
@@ -92,7 +97,7 @@ class HomeScreen extends StatelessWidget {
                 minHeight: 12,
               ),
               child: Text(
-                '${(data == null) ? 0 : HomeCubit.get(context).cartModel!.data!.cartItem!.length}',
+                '${(_data != null) ? _data.data?.cartItem?.length : 0}',
                 style: TextStyle(color: Colors.white, fontSize: 8),
                 textAlign: TextAlign.center,
               ),

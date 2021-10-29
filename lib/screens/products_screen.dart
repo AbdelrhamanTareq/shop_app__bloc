@@ -18,24 +18,16 @@ class ProductsScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         final HomeModel? _homeData = HomeCubit.get(context).homeModel;
+        print('_homeData $_homeData');
+        print(state);
 
-        // print(_homeData!.data);
         if (state is GetProductDetailsLoadingState) {
           EasyLoading.show();
         }
-        //  else if (state is GetProductDetailSuccsesState) {
-        //   EasyLoading.dismiss();
-        // }
 
         return Scaffold(
-          // backgroundColor: Colors.grey,
-          body: (state is HomeLoadingState || _homeData == null
-              // state is! HomeSuccsesState
-              )
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
-              : SingleChildScrollView(
+          body: (_homeData != null)
+              ? SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -236,7 +228,8 @@ class ProductsScreen extends StatelessWidget {
                               )),
                     ],
                   ),
-                ),
+                )
+              : buildProgressIndicator(),
         );
       },
     );

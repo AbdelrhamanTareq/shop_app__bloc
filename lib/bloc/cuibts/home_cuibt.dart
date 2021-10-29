@@ -26,10 +26,11 @@ class HomeCubit extends Cubit<HomeStates> {
 
   static HomeCubit get(context) => BlocProvider.of(context);
 
+  Map<int, bool> inCart = {};
+  Map<int, bool> favorites = {};
+
   HomeModel? homeModel;
 
-  Map<int, bool> favorites = {};
-  Map<int, bool> inCart = {};
   Future<HomeModel?> getHomeData() async {
     emit(HomeLoadingState());
 
@@ -40,7 +41,7 @@ class HomeCubit extends Cubit<HomeStates> {
 
       homeModel = HomeModel.fromJson(response.data);
 
-      print(homeModel!.data!.products[0].name);
+      print('abcdef${homeModel!.data!.products[0].name}');
 
       homeModel!.data!.products.forEach((element) {
         favorites.addAll({element.id!: element.inFavorites!});
@@ -284,5 +285,11 @@ class HomeCubit extends Cubit<HomeStates> {
       print(error.toString());
       // emit(AddOrRemoveCartErrorState(error.toString()));
     }
+  }
+
+  String dummy = '';
+  dummyFuckingFunction() {
+    dummy = 'Dummy Fucking Text';
+    print('Dummy Fucking Text');
   }
 }

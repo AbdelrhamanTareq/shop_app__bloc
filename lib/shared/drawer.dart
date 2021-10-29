@@ -21,7 +21,7 @@ class AppDrawer extends StatelessWidget {
       },
       builder: (context, state) {
         final _profileData = AuthCuibt.get(context).profileModel;
-        if (_profileData == null || state is GetProfileLoadingState) {
+        if (_profileData == null || state is! GetProfileSuccuessState) {
           return buildProgressIndicator();
         }
         return Drawer(
