@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
 import 'package:shop_app_bloc/screens/map_screen.dart';
 
 import '/bloc/cuibts/auth_cuibt.dart';
@@ -43,7 +44,8 @@ class EditProfileScreen extends StatelessWidget {
         }
         return Scaffold(
           appBar: AppBar(
-            title: Text('Edit Profile', style: TextStyle(color: Colors.black)),
+            title: Text(getTranslated(context, 'edit_profile_heading'),
+                style: TextStyle(color: Colors.black)),
           ),
           body: SingleChildScrollView(
             child: Column(
@@ -99,11 +101,13 @@ class EditProfileScreen extends StatelessWidget {
                       children: [
                         buildTextFiled(
                           controller: _nameController,
-                          hintText: 'Username',
+                          hintText:
+                              getTranslated(context, 'username_hint_text'),
                           preixIcon: Icon(Icons.supervised_user_circle),
                           validatorFunction: (String? val) {
                             if (val!.length < 4) {
-                              return 'Username too short';
+                              return getTranslated(
+                                  context, 'username_error_text');
                             }
                             return null;
                           },
@@ -114,11 +118,12 @@ class EditProfileScreen extends StatelessWidget {
                         ),
                         buildTextFiled(
                           controller: _emailController,
-                          hintText: 'E-mail',
+                          hintText: getTranslated(context, 'e-mail_hint_text'),
                           preixIcon: Icon(Icons.email),
                           validatorFunction: (val) {
                             if (!val!.contains('@')) {
-                              return 'Wrong email';
+                              return getTranslated(
+                                  context, 'e-mail_error_text');
                             }
                             return null;
                           },
@@ -129,11 +134,11 @@ class EditProfileScreen extends StatelessWidget {
                         ),
                         buildTextFiled(
                           controller: _phoneController,
-                          hintText: 'Phone',
+                          hintText: getTranslated(context, 'phone_hint_text'),
                           preixIcon: Icon(Icons.phone_android),
                           validatorFunction: (String? val) {
                             if (val!.length < 6) {
-                              return 'Phone too short';
+                              return getTranslated(context, 'phone_error_text');
                             }
                             return null;
                           },
@@ -144,11 +149,12 @@ class EditProfileScreen extends StatelessWidget {
                         ),
                         buildTextFiled(
                           controller: _mapController,
-                          hintText: 'Address',
+                          hintText: getTranslated(context, 'address_hint_text'),
                           preixIcon: Icon(Icons.place),
                           validatorFunction: (String? val) {
                             if (val!.length < 6) {
-                              return 'Address too short';
+                              return getTranslated(
+                                  context, 'address_error_text');
                             }
                             return null;
                           },
@@ -163,7 +169,8 @@ class EditProfileScreen extends StatelessWidget {
                             context,
                             MapScreen(),
                           ),
-                          child: buildButtonText(text: 'Map'),
+                          child: buildButtonText(
+                              text: getTranslated(context, 'edit_profile_map')),
                         ),
                         SizedBox(
                           height: 20,
@@ -178,7 +185,10 @@ class EditProfileScreen extends StatelessWidget {
                           ),
                           child: (state is EditProfileLoadingState)
                               ? buildProgressIndicator(isMainColor: false)
-                              : buildButtonText(text: 'Edit'),
+                              : buildButtonText(
+                                  text: getTranslated(
+                                      context, 'edit_profile_button_text'),
+                                ),
                         ),
                       ],
                     ),
@@ -196,7 +206,6 @@ class EditProfileScreen extends StatelessWidget {
 class LinearPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: draw something with canvas
     final paint = Paint()
       ..style = PaintingStyle.fill
       // ..strokeWidth = 4.0

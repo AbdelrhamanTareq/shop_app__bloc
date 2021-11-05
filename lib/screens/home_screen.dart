@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
 
 import '/screens/search_screen.dart';
 import '/shared/component.dart';
@@ -18,7 +19,7 @@ class HomeScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'My Shop',
+              getTranslated(context, 'home_title'),
             ),
             actions: [
               buildCartBadge(
@@ -37,19 +38,19 @@ class HomeScreen extends StatelessWidget {
             items: [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                label: 'Home',
+                label: getTranslated(context, 'nav_home'),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.category),
-                label: 'Category',
+                label: getTranslated(context, 'nav_category'),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.favorite),
-                label: 'Favorite',
+                label: getTranslated(context, 'nav_favorite'),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.settings),
-                label: 'Settings',
+                label: getTranslated(context, 'nav_setting'),
               ),
             ],
             currentIndex: HomeCubit.get(context).currentIndex,

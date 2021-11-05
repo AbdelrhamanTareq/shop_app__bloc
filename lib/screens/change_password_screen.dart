@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
 
 import '/bloc/cuibts/auth_cuibt.dart';
 import '/bloc/states/auth_state.dart';
@@ -42,12 +43,11 @@ class ChangePasswordScreen extends StatelessWidget {
             _newPassController.clear();
             _conirmPassController.clear();
           });
-          print('ddddd${state.data['message']}');
         }
         return Scaffold(
           appBar: AppBar(
-            title:
-                Text('Change Password', style: TextStyle(color: Colors.black)),
+            title: Text(getTranslated(context, 'change_pass_heading'),
+                style: TextStyle(color: Colors.black)),
           ),
           body: SingleChildScrollView(
             child: Column(
@@ -64,7 +64,7 @@ class ChangePasswordScreen extends StatelessWidget {
                         buildTextFiled(
                             keyboardType: TextInputType.visiblePassword,
                             controller: _passController,
-                            hintText: 'Password',
+                            hintText: getTranslated(context, 'pass_hint_text'),
                             preixIcon: Icon(Icons.vpn_key),
                             suffixIcon: IconButton(
                               icon: Icon(AuthCuibt.get(context).isVisible
@@ -77,7 +77,8 @@ class ChangePasswordScreen extends StatelessWidget {
                             obscureText: !AuthCuibt.get(context).isVisible,
                             validatorFunction: (String? val) {
                               if (val!.length < 6) {
-                                return 'Short password';
+                                return getTranslated(
+                                    context, 'pass_error_text');
                               }
                               return null;
                             }),
@@ -86,11 +87,13 @@ class ChangePasswordScreen extends StatelessWidget {
                         ),
                         buildTextFiled(
                           controller: _newPassController,
-                          hintText: 'New Password',
+                          hintText:
+                              getTranslated(context, 'new_pass_hint_text'),
                           preixIcon: Icon(Icons.vpn_key),
                           validatorFunction: (String? val) {
                             if (val!.length < 6) {
-                              return 'Short password';
+                              return getTranslated(
+                                  context, 'new_pass_error_text');
                             }
                             return null;
                           },
@@ -101,11 +104,13 @@ class ChangePasswordScreen extends StatelessWidget {
                         ),
                         buildTextFiled(
                           controller: _conirmPassController,
-                          hintText: 'Confirm Password',
+                          hintText:
+                              getTranslated(context, 'confirm_pass_hint_text'),
                           preixIcon: Icon(Icons.vpn_key),
                           validatorFunction: (String? val) {
                             if (val! != _newPassController.text) {
-                              return 'Password doesnot matched';
+                              return getTranslated(
+                                  context, 'confirm_pass_error_text');
                             }
                             return null;
                           },
@@ -123,7 +128,10 @@ class ChangePasswordScreen extends StatelessWidget {
                           ),
                           child: (state is ChangePasswordLoadingState)
                               ? buildProgressIndicator(isMainColor: false)
-                              : buildButtonText(text: 'Change Password'),
+                              : buildButtonText(
+                                  text: getTranslated(
+                                      context, 'change_pass_button_text'),
+                                ),
                         ),
                       ],
                     ),

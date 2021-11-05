@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
 
 import '/bloc/cuibts/home_cuibt.dart';
 import '/bloc/states/home_state.dart';
@@ -35,7 +36,7 @@ class CategoryScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    'Categoreis',
+                    getTranslated(context, 'category_heading'),
                     style: Theme.of(context).textTheme.headline4,
                   ),
                 ),
@@ -44,7 +45,6 @@ class CategoryScreen extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, i) => InkWell(
                     onTap: () {
-                      print('abc');
                       HomeCubit.get(context)
                           .getCategoryDetails(
                               _categoreyModel!.data!.dataModel![i].id!)

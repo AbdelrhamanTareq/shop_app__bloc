@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
 
 import '/bloc/cuibts/auth_cuibt.dart';
 import '/bloc/states/auth_state.dart';
@@ -44,27 +45,27 @@ class AppDrawer extends StatelessWidget {
                 ),
                 buildListTile(
                   icon: Icons.note_add,
-                  text: 'My Order',
+                  text: getTranslated(context, 'drawer_text1'),
                   function: () {},
                 ),
                 buildListTile(
                   icon: Icons.note_add,
-                  text: 'My Order',
+                  text: getTranslated(context, 'drawer_text2'),
                   function: () {},
                 ),
                 buildListTile(
                   icon: Icons.note_add,
-                  text: 'My Order',
+                  text: getTranslated(context, 'drawer_text3'),
                   function: () {},
                 ),
                 buildListTile(
                   icon: Icons.note_add,
-                  text: 'My Order',
+                  text: getTranslated(context, 'drawer_text4'),
                   function: () {},
                 ),
                 buildListTile(
                   icon: Icons.note_add,
-                  text: 'My Order',
+                  text: getTranslated(context, 'drawer_text5'),
                   function: () {},
                 ),
                 Expanded(
@@ -72,7 +73,7 @@ class AppDrawer extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   child: buildListTile(
                     icon: Icons.logout,
-                    text: 'Logout',
+                    text: getTranslated(context, 'logout'),
                     function: () async {
                       AuthCuibt.get(context).logout().then((value) {
                         navAndFininsh(context, LoginScreen());

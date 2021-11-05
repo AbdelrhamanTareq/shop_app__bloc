@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
 
 import '/bloc/cuibts/home_cuibt.dart';
 import '/bloc/states/home_state.dart';
@@ -19,7 +20,9 @@ class SearchScreen extends StatelessWidget {
           final _searchData = HomeCubit.get(context).seacrhModel;
           return Scaffold(
             appBar: AppBar(
-              title: Text('Search'),
+              title: Text(
+                getTranslated(context, 'search_title'),
+              ),
             ),
             body: SingleChildScrollView(
               child: Column(
@@ -28,11 +31,11 @@ class SearchScreen extends StatelessWidget {
                     padding: EdgeInsets.all(20),
                     child: buildTextFiled(
                       controller: _sarechController,
-                      hintText: 'Search',
+                      hintText: getTranslated(context, 'search_hint'),
                       preixIcon: Icon(Icons.search),
                       validatorFunction: (val) {
                         if (val!.isEmpty) {
-                          return 'Search can\'t be empty';
+                          return getTranslated(context, 'search_error');
                         }
                         return null;
                       },

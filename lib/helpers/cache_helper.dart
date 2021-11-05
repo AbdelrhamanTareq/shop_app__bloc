@@ -35,4 +35,13 @@ class CacheHelper {
   static Future<bool> deletePref(String key) async {
     return await _prefs.remove(key);
   }
+
+  // static setForAll(String key, dynamic valuse)async {
+  //   switch (valuse) {
+  //     case valuse is String :
+
+  //     return  _prefs.get(key);
+  //     break;
+  //   }
+  // }
 }

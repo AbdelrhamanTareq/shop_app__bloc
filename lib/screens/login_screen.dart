@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
 
 import '/bloc/cuibts/auth_cuibt.dart';
 import '/bloc/states/auth_state.dart';
@@ -63,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                       height: 70,
                     ),
                     Text(
-                      'Login',
+                      getTranslated(context, 'login_title'),
                       style: Theme.of(context)
                           .textTheme
                           .headline4!
@@ -71,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      'Please sign in to continue',
+                      getTranslated(context, 'login_heading'),
                       style: Theme.of(context).textTheme.headline6,
                     ),
                     SizedBox(
@@ -84,11 +85,13 @@ class LoginScreen extends StatelessWidget {
                           buildTextFiled(
                               keyboardType: TextInputType.emailAddress,
                               controller: _emailController,
-                              hintText: 'E-mail',
+                              hintText:
+                                  getTranslated(context, 'e-mail_hint_text'),
                               preixIcon: Icon(Icons.email),
                               validatorFunction: (val) {
                                 if (!val!.contains('@')) {
-                                  return 'Wrong email';
+                                  return getTranslated(
+                                      context, 'e-mail_error_text');
                                 }
                                 return null;
                               }),
@@ -98,7 +101,8 @@ class LoginScreen extends StatelessWidget {
                           buildTextFiled(
                               keyboardType: TextInputType.visiblePassword,
                               controller: _passController,
-                              hintText: 'Password',
+                              hintText:
+                                  getTranslated(context, 'pass_hint_text'),
                               preixIcon: Icon(Icons.vpn_key),
                               suffixIcon: IconButton(
                                 icon: Icon(AuthCuibt.get(context).isVisible
@@ -111,7 +115,8 @@ class LoginScreen extends StatelessWidget {
                               obscureText: !AuthCuibt.get(context).isVisible,
                               validatorFunction: (val) {
                                 if (val!.length < 6) {
-                                  return 'Short password';
+                                  return getTranslated(
+                                      context, 'pass_error_text');
                                 }
                                 return null;
                               }),
@@ -132,7 +137,8 @@ class LoginScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(10)),
                                   child: TextButton(
                                     child: Text(
-                                      'Login',
+                                      getTranslated(
+                                          context, 'login_button_text'),
                                       style: TextStyle(
                                           color: Theme.of(context).buttonColor),
                                     ),
@@ -146,7 +152,10 @@ class LoginScreen extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              Text('Don\'t have an account?'),
+                              Text(
+                                getTranslated(
+                                    context, 'login_dont_have_account'),
+                              ),
                               TextButton(
                                   style: ButtonStyle(
                                     padding:
@@ -160,7 +169,7 @@ class LoginScreen extends StatelessWidget {
                                     navTo(context, RegisterScreen());
                                   },
                                   child: Text(
-                                    'Register',
+                                    getTranslated(context, 'login_register'),
                                     style: TextStyle(
                                         color: Theme.of(context).primaryColor),
                                   ))

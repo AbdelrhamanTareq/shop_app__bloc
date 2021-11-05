@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
 
 import '/bloc/cuibts/home_cuibt.dart';
 import '/bloc/states/home_state.dart';
@@ -17,7 +18,7 @@ class FavoriteScreen extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         } else if (HomeCubit.get(context).favorites.isEmpty) {
           return Center(
-            child: Text('No favorite yet! Add some'),
+            child: Text(getTranslated(context, 'fav_empty_text')),
           );
         }
         return Padding(

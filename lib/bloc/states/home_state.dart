@@ -55,8 +55,6 @@ class DeleteFavoriteErrorState extends HomeStates {
   DeleteFavoriteErrorState(this.error);
 }
 
-class SwitchDarkMode extends HomeStates {}
-
 class SearchLoadingState extends HomeStates {}
 
 class SearchSuccsesState extends HomeStates {}
@@ -86,3 +84,7 @@ class AddOrRemoveCartErrorState extends HomeStates {
   final String error;
   AddOrRemoveCartErrorState(this.error);
 }
+
+class SwitchDarkMode extends HomeStates {}
+
+class SwitchLanguage extends HomeStates {}

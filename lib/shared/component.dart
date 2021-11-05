@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:shop_app_bloc/bloc/cuibts/home_cuibt.dart';
 
 import '/helpers/cache_helper.dart';
 
 final String token = CacheHelper.getToken('token') ?? '';
+
+// bool isArabic = HomeCubit.get(context).isArabic;
 
 void navAndFininsh(context, Widget screen) {
   Navigator.of(context).pushAndRemoveUntil(
@@ -78,13 +81,9 @@ Container buildButton(context,
           onPressed: () async {
             function();
           },
-          child: child
-         
-          ),
+          child: child),
     );
 Text buildButtonText({required String text}) => Text(
       text,
       style: TextStyle(color: Colors.white),
     );
-
-   

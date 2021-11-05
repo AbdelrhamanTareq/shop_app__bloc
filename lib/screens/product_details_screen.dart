@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
 
 import '/bloc/cuibts/home_cuibt.dart';
 import '/bloc/states/home_state.dart';
@@ -228,7 +229,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       Padding(
                         padding: EdgeInsets.all(15),
                         child: Text(
-                          'Product Details',
+                          getTranslated(context, 'product_detailes_heading'),
                           style: (_darkTheme)
                               ? Theme.of(context).textTheme.headline6!
                               : Theme.of(context)
@@ -260,7 +261,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               ? buildProgressIndicator(isMainColor: false)
                               : TextButton(
                                   child: Text(
-                                    'ADD TO CART',
+                                    getTranslated(context, 'add_to_cart'),
                                     style: TextStyle(color: Colors.white),
                                   ),
                                   onPressed: () {

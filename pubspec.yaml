@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations: 
+    sdk: flutter
  
   smooth_page_indicator: ^0.3.0-nullsafety.0
   shared_preferences: ^2.0.6
@@ -72,6 +74,8 @@ flutter:
     - assets/images/iamge2.png
     - assets/images/iamge3.png
     - assets/logo.png
+    - assets/lang/en.json
+    - assets/lang/ar.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -30,19 +31,18 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     _onBoarding = [
       OnBoaringModel(
         imagePath: 'assets/images/iamge1.png',
-        title: 'ONLINE CART',
-        body:
-            'Select and memorize your future purchase with smart online shopping cart',
+        title: getTranslated(context, 'on_boaridng_title1'),
+        body: getTranslated(context, 'on_boaridng_desc1'),
       ),
       OnBoaringModel(
         imagePath: 'assets/images/iamge2.png',
-        title: 'SALES AND GIFTS',
-        body: 'Holiday sales. Birthday gifts. Multi choice and categories',
+        title: getTranslated(context, 'on_boaridng_title2'),
+        body: getTranslated(context, 'on_boaridng_desc2'),
       ),
       OnBoaringModel(
         imagePath: 'assets/images/iamge3.png',
-        title: 'CLIENT REVIEW',
-        body: 'Honest feedbacks from our clients, Happy clients - happy us',
+        title: getTranslated(context, 'on_boaridng_title3'),
+        body: getTranslated(context, 'on_boaridng_desc3'),
       ),
     ];
     super.initState();
@@ -125,7 +125,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     navAndFininsh(context, LoginScreen());
                   },
                   child: Text(
-                    'Skip',
+                    getTranslated(context, 'on_boaridng_skip'),
                     style: TextStyle(
                       color: Colors.grey,
                     ),
@@ -151,7 +151,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     );
                   },
                   child: Text(
-                    'Next',
+                    getTranslated(context, 'on_boaridng_next'),
                     style: TextStyle(
                       color: Colors.grey,
                     ),

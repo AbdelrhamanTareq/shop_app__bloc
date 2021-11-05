@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
 
 import '/bloc/cuibts/home_cuibt.dart';
 import '/bloc/states/home_state.dart';
@@ -20,7 +21,9 @@ class CartScreen extends StatelessWidget {
         }
         return Scaffold(
             appBar: AppBar(
-              title: Text('Cart'),
+              title: Text(
+                getTranslated(context, 'cart_heading'),
+              ),
             ),
             body: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -59,7 +62,8 @@ class CartScreen extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    'Free shipping',
+                                    getTranslated(
+                                        context, 'cart_free_shipping'),
                                     style: TextStyle(
                                         color: Theme.of(context).primaryColor),
                                   ),
@@ -108,7 +112,7 @@ class CartScreen extends StatelessWidget {
                                             .data!.cartItem![i].product!.id!);
                                   },
                                   child: Text(
-                                    'Remove',
+                                    getTranslated(context, 'cart_remove'),
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),
@@ -123,7 +127,7 @@ class CartScreen extends StatelessWidget {
                     SizedBox(
                       height: 15,
                     ),
-                    Text('Price details',
+                    Text(getTranslated(context, 'cart_price_details'),
                         style: Theme.of(context).textTheme.headline4),
                     SizedBox(
                       height: 10,
@@ -134,11 +138,13 @@ class CartScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(12.0),
                         child: Column(
                           children: [
-                            buildRow('Sub total', '$subTotal', context),
-                            buildRow('Tax', '$tax', context),
+                            buildRow(getTranslated(context, 'cart_sub_total'),
+                                '$subTotal', context),
+                            buildRow(getTranslated(context, 'cart_tax'), '$tax',
+                                context),
                             Divider(),
                             buildRow(
-                              'Total payment',
+                              getTranslated(context, 'cart_total'),
                               '$total',
                               context,
                               isBlack: true,
@@ -152,7 +158,8 @@ class CartScreen extends StatelessWidget {
                       child: buildButton(
                         context,
                         function: () {},
-                        child: buildButtonText(text: 'Checkout'),
+                        child: buildButtonText(
+                            text: getTranslated(context, 'cart_checkout')),
                       ),
                     ),
                   ],

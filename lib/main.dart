@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shop_app_bloc/localiziation/app_localization.dart';
 
 import '/bloc/cuibts/auth_cuibt.dart';
 import '/bloc/states/home_state.dart';
@@ -40,20 +42,12 @@ class MyApp extends StatelessWidget {
         BlocProvider<HomeCubit>.value(
           value: HomeCubit()
             ..getHomeData()
-            ..dummyFuckingFunction()
             ..getCategoryData()
             ..getCartData()
             ..getFavoriteData(),
         ),
         // BlocProvider(
-        //   create: (BuildContext context) => HomeCubit()
-        //     // ..getCategoryData()
-        //     ..getHomeData()
-        //   // ..getFavoriteData()
-        //   // ..getCartData()
-        //   ,
-        //   lazy: false,
-        // ),
+
         BlocProvider(
           create: (BuildContext context) => AuthCuibt()..getProfileData(),
           lazy: false,
@@ -62,7 +56,6 @@ class MyApp extends StatelessWidget {
       child: BlocConsumer<HomeCubit, HomeStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          print('dummy ${HomeCubit.get(context).dummy}');
           return MaterialApp(
             title: 'Shop App',
             builder: EasyLoading.init(),
@@ -70,11 +63,31 @@ class MyApp extends StatelessWidget {
             theme: HomeCubit.get(context).isDark ? darkTheme : lightTheme,
             home: _onBoarding
                 ? ((token != '') ? HomeScreen() : LoginScreen())
-                : OnBoardingScreen()
-            //  _onBoarding ? ((_token != null)) ? HomeScreen():
-            //  (_token != null) ? HomeScreen() : LoginScreen()
-            // _onBoarding ? HomeScreen() : OnBoardingScreen()
-            ,
+                : OnBoardingScreen(),
+
+            //////////////////////////////////////////////////////////
+            ////////            LOCALIZATION /////////////////////////
+            locale:
+                HomeCubit.get(context).isArabic ? Locale('ar') : Locale('en'),
+            localizationsDelegates: [
+              AppLocalization.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: [
+              Locale('en', 'US'),
+              Locale('ar', 'EG'),
+            ],
+            // localeResolutionCallback: (deviceLanguage, supportedLocales) {
+            //   for (var locale in supportedLocales) {
+            //     if (locale.languageCode == deviceLanguage!.languageCode &&
+            //         locale.countryCode == deviceLanguage.countryCode) {
+            //       return deviceLanguage;
+            //     }
+            //   }
+            //   return supportedLocales.first;
+            // },
           );
         },
       ),

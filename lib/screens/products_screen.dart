@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
 
 import '/screens/product_details_screen.dart';
 import '/shared/component.dart';
@@ -18,8 +19,6 @@ class ProductsScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         final HomeModel? _homeData = HomeCubit.get(context).homeModel;
-        print('_homeData $_homeData');
-        print(state);
 
         if (state is GetProductDetailsLoadingState) {
           EasyLoading.show();
@@ -55,9 +54,9 @@ class ProductsScreen extends StatelessWidget {
                         height: 10,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Products',
+                          getTranslated(context, 'product_heading'),
                           style: Theme.of(context).textTheme.headline4,
                         ),
                       ),

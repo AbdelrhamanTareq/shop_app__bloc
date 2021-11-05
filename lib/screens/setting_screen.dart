@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
 
 import '/bloc/cuibts/home_cuibt.dart';
 import '/screens/change_password_screen.dart';
@@ -13,7 +14,8 @@ class SettingScreen extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 15),
-          buildHeading('Account', context, Icons.account_balance_rounded),
+          buildHeading(getTranslated(context, 'setting_account_heading'),
+              context, Icons.account_balance_rounded),
           buildDivider(),
           Padding(
             padding: const EdgeInsets.all(20.0),
@@ -21,24 +23,28 @@ class SettingScreen extends StatelessWidget {
               // color: Theme.of(context).canvasColor,
               child: Column(
                 children: [
-                  buildIconListTile(context, 'Edit Profile', () {
+                  buildIconListTile(
+                      context, getTranslated(context, 'setting_edit_profile'),
+                      () {
                     navTo(context, EditProfileScreen());
                   }),
                   buildIconListTile(
                     context,
-                    'Change Password',
+                    getTranslated(context, 'setting_change_password'),
                     () {
                       navTo(context, ChangePasswordScreen());
                     },
                   ),
-                  buildIconListTile(context, 'Privacy', () {
+                  buildIconListTile(
+                      context, getTranslated(context, 'setting_privacy'), () {
                     navTo(context, PrivacyScreen());
                   }),
                 ],
               ),
             ),
           ),
-          buildHeading('Notification', context, Icons.notifications),
+          buildHeading(getTranslated(context, 'setting_account_notification'),
+              context, Icons.notifications),
           buildDivider(),
           Padding(
             padding: const EdgeInsets.all(20.0),
@@ -47,17 +53,32 @@ class SettingScreen extends StatelessWidget {
               child: Column(
                 children: [
                   buildSwitchListTile(
-                      context, 'Dark Mode', HomeCubit.get(context).isDark,
-                      (state) {
+                      context,
+                      getTranslated(context, 'setting_change_password'),
+                      HomeCubit.get(context).isDark, (state) {
                     HomeCubit.get(context).darkMode(state);
                   }),
                   buildSwitchListTile(
-                      context, 'App notification', false, () {}),
+                    context,
+                    getTranslated(context, 'setting_change_language'),
+                    // false,
+                    HomeCubit.get(context).isArabic,
+                    (state) {
+                      print(state);
+                      HomeCubit.get(context).changeLang(state);
+                    },
+                  ),
+                  buildSwitchListTile(
+                      context,
+                      getTranslated(context, 'setting_app_notification'),
+                      false,
+                      () {}),
                 ],
               ),
             ),
           ),
-          buildHeading('More', context, Icons.more_outlined),
+          buildHeading(getTranslated(context, 'setting_more_heading'), context,
+              Icons.more_outlined),
           buildDivider(),
           Padding(
             padding: const EdgeInsets.all(20.0),
@@ -65,8 +86,10 @@ class SettingScreen extends StatelessWidget {
               color: Theme.of(context).canvasColor,
               child: Column(
                 children: [
-                  buildIconListTile(context, 'Language', () {}),
-                  buildIconListTile(context, 'Country', () {}),
+                  buildIconListTile(context,
+                      getTranslated(context, 'setting_language'), () {}),
+                  buildIconListTile(context,
+                      getTranslated(context, 'setting_country'), () {}),
                 ],
               ),
             ),

@@ -1,0 +1,90 @@
+{
+    "home_title": "متجري",
+    "nav_home": "الرئيسية",
+    "nav_category": "الاقسام",
+    "nav_favorite": "المفضلة",
+    "nav_setting": "الاعدادات",
+
+    "setting_account_heading": "حسابي",
+    "setting_edit_profile": "تعديل الملف الشخصي",
+    "setting_change_password": "تغيير كلمة المرور",
+    "setting_privacy": "الخصوصية",
+    "setting_account_notification": "الاشعارات",
+    "setting_change_language": "تغيير اللغة",
+    "setting_app_notification": "الاشعارات",
+    "setting_more_heading": "المزيد",
+    "setting_language": "اللغة",
+    "setting_country": "البلد",
+
+    "search_title": "بحث",
+    "search_hint": "ابحث",
+    "search_error": "خانة البحث لا يمكن ان تكون فارغة",
+
+    "product_heading": "المنتجات",
+
+    "product_detailes_heading": "تفاصيل المنتج",
+
+    "add_to_cart": "اضف للعربة",
+
+    "fav_empty_text": "لم يتم اضافة للمفضلة! قم باضافة البعض",
+
+    "category_heading": "الاقسام",
+
+    "cart_heading": "الاقسام",
+    "cart_free_shipping": "شحن مجاني",
+    "cart_remove": "حذف",
+    "cart_price_details": "تفاصيل السعر",
+    "cart_sub_total": "السعر",
+    "cart_tax": "الضرائب",
+    "cart_total": "الاجمالي",
+    "cart_checkout": "شراء",
+
+    "on_boaridng_title1": "تسوق الكتروبي",
+    "on_boaridng_title2": "تخفيضات و هدايا",
+    "on_boaridng_title3": "مراجعات العملاء",
+    "on_boaridng_desc1": "اختار و احفظ مستقبل الشراء مع تسوق الكتروني ذكي",
+    "on_boaridng_desc2": "تخفضيات الاجازات , هدايا اعياد الميلاد و العديد من الخيارات و الاقسام",
+    "on_boaridng_desc3": "تقيمات حقيقة من العملاء - عميل سعيد نحن سعداء",
+    "on_boaridng_next": "التالي",
+    "on_boaridng_skip": "تخطي",
+
+    "edit_profile_heading": "تعديل الملف الشخصي",
+    "edit_profile_button_text": "تعديل",
+    "username_hint_text": "اسم المستخدم",
+    "username_error_text": "اسم المستخدم قصير جدا",
+    "e-mail_hint_text": "البريد الالكنروني",
+    "e-mail_error_text": "البريد الالكتروني خاطئ",
+    "phone_hint_text": "الهاتف",
+    "phone_error_text": "الهاتف خاطئ",
+    "address_hint_text": "العنوان",
+    "address_error_text": "العنوان قصير جدا",
+    "edit_profile_map":"الخريطة",
+
+    "change_pass_heading":"تغيير كلمة المرور",
+    "change_pass_button_text":"تغيير كلمة المرور",
+    "pass_hint_text":"كلمة المرور",
+    "pass_error_text":"كلمة المرور قصيرة",
+    "new_pass_hint_text":"كلمة المرور الجديدة",
+    "new_pass_error_text":"كلمة المرور قصيرة",
+    "confirm_pass_hint_text":"تاكيد كلمة المرور",
+    "confirm_pass_error_text":"كلمة المرور غير متطابقة",
+
+    "login_title":"تسجيل الدخول",
+    "login_heading":"من فضلك سجل دخولك لتتمكن من المتابعة",
+    "login_button_text":"تسجيل الدخول",
+    "login_dont_have_account":"لبس لديك حساب؟",
+    "login_register":"تسجيل حساب",
+
+    "register_title":"تسجيل حساب",
+    "register_heading":"من فضلك سجل حساب لتتمكن من المتابعة",
+    "register_button_text":"تسجيل حساب",
+    "register_have_account":"لديك حساب؟",
+    "register_login":"تسجيل الدخول",
+
+    "drawer_text1":"طلباتي",
+    "drawer_text2":"الاقسام",
+    "drawer_text3":"ملفي الشخصي",
+    "drawer_text4":"المفضلة",
+    "drawer_text5":"الاعدادت",
+    "logout":"تسجيل الخروج"
+}

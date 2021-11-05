@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:shop_app_bloc/bloc/cuibts/home_cuibt.dart';
 
 import '/shared/component.dart';
 
@@ -18,7 +19,14 @@ class DioHelper {
       options: Options(
           receiveDataWhenStatusError: true,
           contentType: 'application/json',
-          headers: {'Authorization': token ?? '', 'lang': 'en'}),
+          headers: {
+            'Authorization': token ?? '',
+            'lang':
+                //  HomeCubit.get(context).isArabic
+                // ? 'ar'
+                // :
+                'ar'
+          }),
     );
   }
 
@@ -28,7 +36,7 @@ class DioHelper {
       options: Options(
           receiveDataWhenStatusError: true,
           contentType: 'application/json',
-          headers: {'Authorization': token, 'lang': 'en'}),
+          headers: {'Authorization': token, 'lang': 'ar'}),
     );
   }
 
@@ -38,7 +46,7 @@ class DioHelper {
       options: Options(
           receiveDataWhenStatusError: true,
           contentType: 'application/json',
-          headers: {'Authorization': token, 'lang': 'en'}),
+          headers: {'Authorization': token, 'lang': 'ar'}),
     );
   }
 
@@ -48,7 +56,7 @@ class DioHelper {
         options: Options(
             receiveDataWhenStatusError: true,
             contentType: 'application/json',
-            headers: {'Authorization': token, 'lang': 'en'}),
+            headers: {'Authorization': token, 'lang': 'ar'}),
         data: data);
   }
 

@@ -1,0 +1,104 @@
+{
+    "home_title": "My Shop",
+    "nav_home": "Home",
+    "nav_category": "Category",
+    "nav_favorite": "Favorite",
+
+    "nav_setting": "Settings",
+    "setting_account_heading": "Account",
+    "setting_edit_profile": "Edit Profile",
+    "setting_change_password": "Change Password",
+    "setting_privacy": "Privacy",
+    "setting_account_notification": "Notification",
+    "setting_change_language": "Change Language",
+    "setting_app_notification": "App Notification",
+    "setting_more_heading": "More",
+    "setting_language": "Language",
+    "setting_country": "Country",
+
+    "search_title": "Search",
+    "search_hint": "Search",
+    "search_error": "Search field can't be empty",
+
+    "product_heading": "Products",
+    
+    "product_detailes_heading": "Products Details",
+
+    "add_to_cart": "Add to cart",
+
+    "fav_empty_text": "No favorite yet! Add some",
+
+    "category_heading": "Categoreis",
+
+    "cart_heading": "Cart",
+    "cart_free_shipping": "Free shipping",
+    "cart_remove": "Remove",
+    "cart_price_details": "Price details",
+    "cart_sub_total": "Sub total",
+    "cart_tax": "Tax",
+    "cart_total": "Total payment",
+    "cart_checkout": "Checkout",
+
+    "on_boaridng_title1": "ONLINE CART",
+    "on_boaridng_title2": "SALES AND GIFTS",
+    "on_boaridng_title3": "CLIENT REVIEW",
+    "on_boaridng_desc1": "Select and memorize your future purchase with smart online shopping cart",
+    "on_boaridng_desc2": "Holiday sales. Birthday gifts. Multi choice and categories",
+    "on_boaridng_desc3": "Honest feedbacks from our clients, Happy clients - happy us",
+    "on_boaridng_next": "Next",
+    "on_boaridng_skip": "Skip",
+
+    "edit_profile_heading": "Edit Profile",
+    "edit_profile_button_text": "Edit",
+    "username_hint_text": "Username",
+    "username_error_text": "Username too short",
+    "e-mail_hint_text": "E-mail",
+    "e-mail_error_text": "Wrong email",
+    "phone_hint_text": "Phone",
+    "phone_error_text": "Phone too short",
+    "address_hint_text": "Address",
+    "address_error_text": "Address too short",
+    "edit_profile_map":"map",
+
+    "change_pass_heading":"Change Password",
+    "change_pass_button_text":"Change Password",
+    "pass_hint_text":"Password",
+    "pass_error_text":"Short password",
+    "new_pass_hint_text":"New Password",
+    "new_pass_error_text":"Short password",
+    "confirm_pass_hint_text":"Confirm Password",
+    "confirm_pass_error_text":"Password doesnot matched",
+
+    "login_title":"Login",
+    "login_heading":"Please sign in to continue",
+    "login_button_text":"Login",
+    "login_dont_have_account":"Don't have an account?",
+    "login_register":"Register",
+
+    "register_title":"Register",
+    "register_heading":"Please register in to continue",
+    "register_button_text":"Register",
+    "register_have_account":"have an account?",
+    "register_login":"Login",
+
+    "drawer_text1":"My Order",
+    "drawer_text2":"Categoreies",
+    "drawer_text3":"Profile",
+    "drawer_text4":"Favorite",
+    "drawer_text5":"Setting",
+    "logout":"Logout"
+
+
+    
+   
+
+
+
+
+
+
+    
+    
+
+
+}

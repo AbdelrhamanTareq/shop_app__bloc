@@ -199,13 +199,6 @@ class HomeCubit extends Cubit<HomeStates> {
     }
   }
 
-  bool isDark = CacheHelper.getPref('darkMode') ?? false;
-  void darkMode(bool state) {
-    isDark = state;
-    CacheHelper.setPref('darkMode', state);
-    emit(SwitchDarkMode());
-  }
-
   SeacrhModel? seacrhModel;
   Future<SeacrhModel?> search(String text) async {
     emit(SearchLoadingState());
@@ -287,9 +280,17 @@ class HomeCubit extends Cubit<HomeStates> {
     }
   }
 
-  String dummy = '';
-  dummyFuckingFunction() {
-    dummy = 'Dummy Fucking Text';
-    print('Dummy Fucking Text');
+  bool isDark = CacheHelper.getPref('darkMode') ?? false;
+  void darkMode(bool state) {
+    isDark = state;
+    CacheHelper.setPref('darkMode', state);
+    emit(SwitchDarkMode());
+  }
+
+  bool isArabic = CacheHelper.getPref('Arabic') ?? false;
+  changeLang(bool state) {
+    isArabic = state;
+    CacheHelper.setPref('Arabic', state);
+    emit(SwitchLanguage());
   }
 }
