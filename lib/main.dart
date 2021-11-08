@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(token);
+
     return MultiBlocProvider(
       providers: [
         BlocProvider<HomeCubit>.value(
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
       child: BlocConsumer<HomeCubit, HomeStates>(
         listener: (context, state) {},
         builder: (context, state) {
+          print('cart q ${HomeCubit.get(context).cartQuantity}');
           return MaterialApp(
             title: 'Shop App',
             builder: EasyLoading.init(),
@@ -67,8 +69,10 @@ class MyApp extends StatelessWidget {
 
             //////////////////////////////////////////////////////////
             ////////            LOCALIZATION /////////////////////////
-            locale:
-                HomeCubit.get(context).isArabic ? Locale('ar') : Locale('en'),
+            locale: isArabic1
+                // HomeCubit.get(context).isArabic
+                ? Locale('ar')
+                : Locale('en'),
             localizationsDelegates: [
               AppLocalization.delegate,
               GlobalMaterialLocalizations.delegate,

@@ -183,14 +183,16 @@ class HomeCubit extends Cubit<HomeStates> {
     return favoriteModel;
   }
 
-  Future deleteFavorite(int id, int productId) async {
+  Future deleteFavorite(
+    int id,
+  ) async {
     emit(DeleteFavoriteLoadingState());
+    favoriteModel!.data!.dataModel!.removeWhere((element) => element.id == id);
     try {
       final response = await DioHelper.deleteData(endPoint: 'favorites/$id');
       print(response.data);
-      // await getFavoriteData();
+
       // favoriteModel = FavoriteModel.fromJson(response.data);
-      // print(favoriteModel!.data!.dataModel![0].products!.name);
 
       emit(DeleteFavoriteSuccsesState());
     } catch (error) {
@@ -217,11 +219,17 @@ class HomeCubit extends Cubit<HomeStates> {
   }
 
   CartModel? cartModel;
+
+  Map<int, int> cartQuantity = {};
   Future<CartModel?> getCartData() async {
     emit(GetCartDataLoadingState());
+
     try {
       final response = await DioHelper.getData(endPoint: 'carts');
       cartModel = CartModel.fromJson(response.data);
+      cartModel!.data!.cartItem!.forEach((element) {
+        cartQuantity.addAll({element.id!: element.quantity!});
+      });
       print('xyxyxyxyx  ${cartModel!.data!.cartItem!.length}');
 
       emit(GetCartDataSuccsesState());
@@ -234,6 +242,11 @@ class HomeCubit extends Cubit<HomeStates> {
 
   Future addOrRemvoeCart({required int productId}) async {
     inCart[productId] = !inCart[productId]!;
+    if (inCart[productId] = true) {
+      cartModel!.data!.cartItem!
+          .removeWhere((element) => element.product!.id == productId);
+    }
+    // cartModel!.data!.cartItem!.contains()
     emit(AddOrRemoveCartLoadingState());
     try {
       final response = await DioHelper.postData(
@@ -259,8 +272,18 @@ class HomeCubit extends Cubit<HomeStates> {
     }
   }
 
-  Future updateCart({required int productId, required int quantity}) async {
-    // emit(AddOrRemoveCartLoadingState());
+  Future updateCart({
+    required int productId,
+    required int quantity,
+    bool isAdd = false,
+  }) async {
+    emit(AddOrRemoveCartLoadingState());
+
+    isAdd
+        ? cartQuantity[productId] = cartQuantity[productId]! + 1
+        : cartQuantity[productId] = cartQuantity[productId]! - 1;
+    print('a7a ${cartQuantity[productId]!}');
+    print('2a7a ${cartQuantity}');
     try {
       final response = await DioHelper.updateData(
         endPoint: 'carts/$productId',
@@ -271,12 +294,16 @@ class HomeCubit extends Cubit<HomeStates> {
       // changeFavoriteModel = ChangeFavorite.fromJson(response.data);
       print(response.data);
 
-      getCartData();
-
-      // emit(AddOrRemoveCartSuccsesState(response.data));
+      // getCartData();
+      if (response.statusCode != 200 || !cartModel!.status!) {
+        isAdd
+            ? cartQuantity[productId] = cartQuantity[productId]! - 1
+            : cartQuantity[productId] = cartQuantity[productId]! + 1;
+      }
+      emit(AddOrRemoveCartSuccsesState(response.data));
     } catch (error) {
       print(error.toString());
-      // emit(AddOrRemoveCartErrorState(error.toString()));
+      emit(AddOrRemoveCartErrorState(error.toString()));
     }
   }
 
@@ -287,9 +314,9 @@ class HomeCubit extends Cubit<HomeStates> {
     emit(SwitchDarkMode());
   }
 
-  bool isArabic = CacheHelper.getPref('Arabic') ?? false;
+  // bool isArabic = CacheHelper.getPref('Arabic') ?? false;
   changeLang(bool state) {
-    isArabic = state;
+    isArabic1 = state;
     CacheHelper.setPref('Arabic', state);
     emit(SwitchLanguage());
   }

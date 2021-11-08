@@ -10,6 +10,7 @@
     "setting_change_password": "Change Password",
     "setting_privacy": "Privacy",
     "setting_account_notification": "Notification",
+    "setting_dark_mode": "Dark Mode",
     "setting_change_language": "Change Language",
     "setting_app_notification": "App Notification",
     "setting_more_heading": "More",
@@ -31,6 +32,7 @@
     "category_heading": "Categoreis",
 
     "cart_heading": "Cart",
+    "cart_empty_text":"No products in cart keep shopping",
     "cart_free_shipping": "Free shipping",
     "cart_remove": "Remove",
     "cart_price_details": "Price details",

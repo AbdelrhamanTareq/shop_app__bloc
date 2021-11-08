@@ -54,7 +54,7 @@ class SettingScreen extends StatelessWidget {
                 children: [
                   buildSwitchListTile(
                       context,
-                      getTranslated(context, 'setting_change_password'),
+                      getTranslated(context, 'setting_dark_mode'),
                       HomeCubit.get(context).isDark, (state) {
                     HomeCubit.get(context).darkMode(state);
                   }),
@@ -62,7 +62,8 @@ class SettingScreen extends StatelessWidget {
                     context,
                     getTranslated(context, 'setting_change_language'),
                     // false,
-                    HomeCubit.get(context).isArabic,
+                    // HomeCubit.get(context).isArabic,
+                    isArabic1,
                     (state) {
                       print(state);
                       HomeCubit.get(context).changeLang(state);

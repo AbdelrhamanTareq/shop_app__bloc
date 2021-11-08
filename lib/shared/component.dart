@@ -6,7 +6,7 @@ import '/helpers/cache_helper.dart';
 
 final String token = CacheHelper.getToken('token') ?? '';
 
-// bool isArabic = HomeCubit.get(context).isArabic;
+bool isArabic1 = CacheHelper.getPref('Arabic') ?? false;
 
 void navAndFininsh(context, Widget screen) {
   Navigator.of(context).pushAndRemoveUntil(

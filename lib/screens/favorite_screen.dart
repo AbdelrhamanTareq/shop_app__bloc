@@ -10,15 +10,23 @@ class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _darkTheme = Theme.of(context).brightness == Brightness.dark;
+    print('fav${HomeCubit.get(context).favorites}');
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {},
       builder: (context, state) {
         final _favoriteData = HomeCubit.get(context).favoriteModel;
+        Map<int, bool> favorites = HomeCubit.get(context).favorites;
+
         if (state is GetFavoriteLoadingState || _favoriteData == null) {
           return Center(child: CircularProgressIndicator());
-        } else if (HomeCubit.get(context).favorites.isEmpty) {
+        } else if (favorites.entries
+            .every((element) => element.value == false)) {
           return Center(
-            child: Text(getTranslated(context, 'fav_empty_text')),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(getTranslated(context, 'fav_empty_text'),
+                  style: TextStyle(fontSize: 25)),
+            ),
           );
         }
         return Padding(
@@ -39,10 +47,9 @@ class FavoriteScreen extends StatelessWidget {
                     onDismissed: (direction) async {
                       print('xyz');
                       await HomeCubit.get(context)
-                          .deleteFavorite(_favoriteData.data!.dataModel![i].id!,
-                              _favoriteData.data!.dataModel![i].products!.id!)
+                          .deleteFavorite(_favoriteData.data!.dataModel![i].id!)
                           .then((value) {
-                        HomeCubit.get(context).getFavoriteData();
+                        // HomeCubit.get(context).getFavoriteData();
                         HomeCubit.get(context).getHomeData();
                       });
                     },

@@ -10,6 +10,7 @@
     "setting_change_password": "تغيير كلمة المرور",
     "setting_privacy": "الخصوصية",
     "setting_account_notification": "الاشعارات",
+    "setting_dark_mode": "الوضع الليلي",
     "setting_change_language": "تغيير اللغة",
     "setting_app_notification": "الاشعارات",
     "setting_more_heading": "المزيد",
@@ -32,6 +33,7 @@
 
     "cart_heading": "الاقسام",
     "cart_free_shipping": "شحن مجاني",
+    "cart_empty_text":"لا يوجد منتجات في العربة .... واصل التسوق",
     "cart_remove": "حذف",
     "cart_price_details": "تفاصيل السعر",
     "cart_sub_total": "السعر",

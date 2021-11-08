@@ -14,7 +14,8 @@ class CartScreen extends StatelessWidget {
       builder: (context, state) {
         final _data = HomeCubit.get(context).cartModel;
         final int subTotal = _data!.data!.subTotal!;
-        final double tax = ((_data.data!.subTotal!) * 0.14);
+        final double tax =
+            double.parse(((_data.data!.subTotal!) * 0.14).toStringAsFixed(2));
         final double total = subTotal - tax;
         if (state is GetCartDataLoadingState) {
           return buildProgressIndicator();
@@ -25,147 +26,165 @@ class CartScreen extends StatelessWidget {
                 getTranslated(context, 'cart_heading'),
               ),
             ),
-            body: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListView.separated(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (context, i) => Row(
+            body: (_data.data!.cartItem!.length == 0)
+                ? Center(
+                    child: Text(getTranslated(context, 'cart_empty_text'),style: TextStyle(fontSize: 25),),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SingleChildScrollView(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Container(
-                            width: 100,
-                            height: 150,
-                            child: Image.network(
-                              _data.data!.cartItem![i].product!.image!,
-                              height: 150,
+                          ListView.separated(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder: (context, i) => Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  width: 100,
+                                  height: 150,
+                                  child: Image.network(
+                                    _data.data!.cartItem![i].product!.image!,
+                                    height: 150,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                        width: 200,
+                                        child: Text(_data.data!.cartItem![i]
+                                            .product!.name!)),
+                                    Text(
+                                      '${_data.data!.cartItem![i].product!.price!}',
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          getTranslated(
+                                              context, 'cart_free_shipping'),
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        IconButton(
+                                          onPressed: () {
+                                            HomeCubit.get(context).updateCart(
+                                              productId:
+                                                  _data.data!.cartItem![i].id!,
+                                              quantity: _data.data!.cartItem![i]
+                                                      .quantity! +
+                                                  1,
+                                              isAdd: true,
+                                            );
+                                          },
+                                          icon: Icon(Icons.add),
+                                        ),
+                                        Text(
+                                            '${HomeCubit.get(context).cartQuantity[_data.data!.cartItem![i].id]}'),
+                                        IconButton(
+                                          onPressed: () {
+                                            if (_data.data!.cartItem![i]
+                                                    .quantity! >
+                                                0) {
+                                              HomeCubit.get(context).updateCart(
+                                                  productId: _data
+                                                      .data!.cartItem![i].id!,
+                                                  quantity: _data
+                                                          .data!
+                                                          .cartItem![i]
+                                                          .quantity! -
+                                                      1);
+                                            }
+                                          },
+                                          icon: Icon(Icons.remove),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Container(
+                                      width: 100,
+                                      height: 40,
+                                      color: Theme.of(context).primaryColor,
+                                      child: TextButton(
+                                        onPressed: () {
+                                          HomeCubit.get(context)
+                                              .addOrRemvoeCart(
+                                                  productId: _data
+                                                      .data!
+                                                      .cartItem![i]
+                                                      .product!
+                                                      .id!);
+                                        },
+                                        child: Text(
+                                          getTranslated(context, 'cart_remove'),
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
+                            separatorBuilder: (context, i) => Divider(),
+                            itemCount: _data.data!.cartItem!.length,
                           ),
                           SizedBox(
-                            width: 20,
+                            height: 15,
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                  width: 200,
-                                  child: Text(
-                                      _data.data!.cartItem![i].product!.name!)),
-                              Text(
-                                '${_data.data!.cartItem![i].product!.price!}',
-                              ),
-                              Row(
+                          Text(getTranslated(context, 'cart_price_details'),
+                              style: Theme.of(context).textTheme.headline4),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Card(
+                            elevation: 10,
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
                                 children: [
-                                  Text(
-                                    getTranslated(
-                                        context, 'cart_free_shipping'),
-                                    style: TextStyle(
-                                        color: Theme.of(context).primaryColor),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      HomeCubit.get(context).updateCart(
-                                          productId:
-                                              _data.data!.cartItem![i].id!,
-                                          quantity: _data.data!.cartItem![i]
-                                                  .quantity! +
-                                              1);
-                                    },
-                                    icon: Icon(Icons.add),
-                                  ),
-                                  Text('${_data.data!.cartItem![i].quantity}'),
-                                  IconButton(
-                                    onPressed: () {
-                                      if (_data.data!.cartItem![i].quantity! >
-                                          0) {
-                                        HomeCubit.get(context).updateCart(
-                                            productId:
-                                                _data.data!.cartItem![i].id!,
-                                            quantity: _data.data!.cartItem![i]
-                                                    .quantity! -
-                                                1);
-                                      }
-                                    },
-                                    icon: Icon(Icons.remove),
+                                  buildRow(
+                                      getTranslated(context, 'cart_sub_total'),
+                                      '$subTotal',
+                                      context),
+                                  buildRow(getTranslated(context, 'cart_tax'),
+                                      '$tax', context),
+                                  Divider(),
+                                  buildRow(
+                                    getTranslated(context, 'cart_total'),
+                                    '$total',
+                                    context,
+                                    isBlack: true,
                                   ),
                                 ],
                               ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Container(
-                                width: 100,
-                                height: 40,
-                                color: Theme.of(context).primaryColor,
-                                child: TextButton(
-                                  onPressed: () {
-                                    HomeCubit.get(context).addOrRemvoeCart(
-                                        productId: _data
-                                            .data!.cartItem![i].product!.id!);
-                                  },
-                                  child: Text(
-                                    getTranslated(context, 'cart_remove'),
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: buildButton(
+                              context,
+                              function: () {},
+                              child: buildButtonText(
+                                  text:
+                                      getTranslated(context, 'cart_checkout')),
+                            ),
                           ),
                         ],
                       ),
-                      separatorBuilder: (context, i) => Divider(),
-                      itemCount: _data.data!.cartItem!.length,
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Text(getTranslated(context, 'cart_price_details'),
-                        style: Theme.of(context).textTheme.headline4),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Card(
-                      elevation: 10,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Column(
-                          children: [
-                            buildRow(getTranslated(context, 'cart_sub_total'),
-                                '$subTotal', context),
-                            buildRow(getTranslated(context, 'cart_tax'), '$tax',
-                                context),
-                            Divider(),
-                            buildRow(
-                              getTranslated(context, 'cart_total'),
-                              '$total',
-                              context,
-                              isBlack: true,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: buildButton(
-                        context,
-                        function: () {},
-                        child: buildButtonText(
-                            text: getTranslated(context, 'cart_checkout')),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ));
+                  ));
       },
     );
   }

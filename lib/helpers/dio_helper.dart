@@ -8,7 +8,12 @@ class DioHelper {
   static late final Dio _dio;
 
   static init() async {
-    _dio = Dio();
+    _dio = Dio(
+      BaseOptions(headers: {
+        'Authorization': token,
+        'lang': isArabic1 ? 'ar' : 'en',
+      }),
+    );
   }
 
   static Future<Response> postData(
@@ -17,16 +22,13 @@ class DioHelper {
       'https://student.valuxapps.com/api/$endPoint',
       data: data,
       options: Options(
-          receiveDataWhenStatusError: true,
-          contentType: 'application/json',
-          headers: {
-            'Authorization': token ?? '',
-            'lang':
-                //  HomeCubit.get(context).isArabic
-                // ? 'ar'
-                // :
-                'ar'
-          }),
+        receiveDataWhenStatusError: true,
+        contentType: 'application/json',
+        // headers: {
+        //   'Authorization': token ?? '',
+        //   'lang': isArabic1 ? 'ar' : 'en',
+        // }
+      ),
     );
   }
 
@@ -34,9 +36,13 @@ class DioHelper {
     return await _dio.get(
       'https://student.valuxapps.com/api/$endPoint',
       options: Options(
-          receiveDataWhenStatusError: true,
-          contentType: 'application/json',
-          headers: {'Authorization': token, 'lang': 'ar'}),
+        receiveDataWhenStatusError: true,
+        contentType: 'application/json',
+        // headers: {
+        //   'Authorization': token,
+        //   'lang': isArabic1 ? 'ar' : 'en',
+        // }
+      ),
     );
   }
 
@@ -44,9 +50,13 @@ class DioHelper {
     return await _dio.delete(
       'https://student.valuxapps.com/api/$endPoint',
       options: Options(
-          receiveDataWhenStatusError: true,
-          contentType: 'application/json',
-          headers: {'Authorization': token, 'lang': 'ar'}),
+        receiveDataWhenStatusError: true,
+        contentType: 'application/json',
+        // headers: {
+        //   'Authorization': token,
+        //   'lang': isArabic1 ? 'ar' : 'en',
+        // }
+      ),
     );
   }
 
@@ -54,20 +64,13 @@ class DioHelper {
       {required String endPoint, required Map<String, dynamic> data}) async {
     return await _dio.put('https://student.valuxapps.com/api/$endPoint',
         options: Options(
-            receiveDataWhenStatusError: true,
-            contentType: 'application/json',
-            headers: {'Authorization': token, 'lang': 'ar'}),
+          receiveDataWhenStatusError: true,
+          contentType: 'application/json',
+          // headers: {
+          //   'Authorization': token,
+          //   'lang': isArabic1 ? 'ar' : 'en',
+          // }
+        ),
         data: data);
   }
-
-  // static Future<Response> search() async {
-  //   return await _dio.post(
-  //     'https://student.valuxapps.com/api/products/search',
-  //     data: {"text": "phone"},
-  //     options: Options(
-  //         receiveDataWhenStatusError: true,
-  //         contentType: 'application/json',
-  //         headers: {'Authorization': token, 'lang': 'en'}),
-  //   );
-  // }
 }
