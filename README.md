@@ -1,16 +1,36 @@
-# shop_app_bloc
+## shop_app_bloc
 
 A new Flutter project.
 
-## Getting Started
+# Getting Started
 
-This project is a starting point for a Flutter application.
+## This is a shop app made with flutter and dart - bloc as state managemnet - rest api for authentication and database -  shared preferences for loacal data - dio for api
 
-A few resources to get you started if this is your first Flutter project:
+## Features
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+<li/>bloc state mangement
+<li>dio for api
+<li>register and login
+<li>google maps
+<li>sign in and sign up with email
+<li>multi language
+<li>dark mode
+<li>shop cart
+<li>favorite item
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+
+### App Pages
+
+<li>login and register pages
+<li>home page 
+<li>category products page
+<li>favorite products page
+<li>cart page
+<li>search page
+<li>settings page
+<li>edit profile page
+<li>on boarding pages
+  
+
