@@ -143,6 +143,7 @@ class LoginScreen extends StatelessWidget {
                                           color: Theme.of(context).buttonColor),
                                     ),
                                     onPressed: () {
+                                      FocusScope.of(context).unfocus();
                                       _submit(context);
                                     },
                                   ),

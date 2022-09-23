@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:shop_app_bloc/bloc/cuibts/home_cuibt.dart';
 
 import '/shared/component.dart';
 
@@ -10,7 +9,7 @@ class DioHelper {
   static init() async {
     _dio = Dio(
       BaseOptions(headers: {
-        'Authorization': token,
+        'Authorization': token ?? "",
         'lang': isArabic1 ? 'ar' : 'en',
       }),
     );
