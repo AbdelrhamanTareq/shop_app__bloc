@@ -152,7 +152,7 @@ class RegisterScreen extends StatelessWidget {
                               controller: _phoneController,
                               hintText:
                                   getTranslated(context, 'phone_hint_text'),
-                              preixIcon: Icon(Icons.vpn_key),
+                              preixIcon: Icon(Icons.phone),
                               validatorFunction: (String? val) {
                                 if (val!.length < 6) {
                                   return getTranslated(
@@ -183,6 +183,7 @@ class RegisterScreen extends StatelessWidget {
                                           color: Theme.of(context).canvasColor),
                                     ),
                                     onPressed: () {
+                                       FocusScope.of(context).unfocus();
                                       _submit(context);
                                     },
                                   ),

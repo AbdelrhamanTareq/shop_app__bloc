@@ -18,6 +18,8 @@ import '/shared/component.dart';
 import '/shared/theme.dart';
 
 //AIzaSyAYn6QIqi6Skqpwy7AOs9K8X3uTRmgTGdk map api
+// abdo123456@test.com
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
@@ -64,7 +66,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: HomeCubit.get(context).isDark ? darkTheme : lightTheme,
             home: _onBoarding
-                ? ((token != '') ? HomeScreen() : LoginScreen())
+                ? ((token != null && token != "") ? HomeScreen() : LoginScreen())
                 : OnBoardingScreen(),
 
             //////////////////////////////////////////////////////////

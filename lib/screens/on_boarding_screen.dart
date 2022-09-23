@@ -26,8 +26,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController _pageController = PageController();
   late List<OnBoaringModel> _onBoarding;
   int _currentIndex = 0;
+
+  
   @override
-  void initState() {
+  void didChangeDependencies() {
     _onBoarding = [
       OnBoaringModel(
         imagePath: 'assets/images/iamge1.png',
@@ -45,7 +47,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         body: getTranslated(context, 'on_boaridng_desc3'),
       ),
     ];
-    super.initState();
+    super.didChangeDependencies();
   }
 
   @override
@@ -56,10 +58,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(height: 150),
+          SizedBox(height: screenHeight * 0.1),
           Expanded(
             child: PageView.builder(
               physics: BouncingScrollPhysics(),
@@ -75,7 +80,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 children: [
                   Container(
                     width: double.infinity,
-                    height: 250,
+                    height: screenHeight*0.3,
                     child: Image(
                       image: AssetImage('${_onBoarding[i].imagePath}'),
                     ),
@@ -93,7 +98,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   Container(
                     width: 300,
                     child: Text('${_onBoarding[i].body}',
-                        style: TextStyle(color: Colors.grey),
+                        style: TextStyle(color: Colors.grey,fontSize: 18),
                         textAlign: TextAlign.center),
                   ),
                 ],
@@ -142,7 +147,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       CacheHelper.setOnboarding('onBoarding', true);
                       navAndFininsh(
                         context,
-                        HomeScreen(),
+                        LoginScreen(),
                       );
                     }
                     _pageController.nextPage(

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:shop_app_bloc/bloc/cuibts/home_cuibt.dart';
 
 import '/helpers/cache_helper.dart';
 
-final String token = CacheHelper.getToken('token') ?? '';
+final String? token = CacheHelper.getToken('token') ;
 
 bool isArabic1 = CacheHelper.getPref('Arabic') ?? false;
 
