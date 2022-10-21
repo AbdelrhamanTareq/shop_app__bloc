@@ -5,7 +5,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '/helpers/cache_helper.dart';
 import '/screens/login_screen.dart';
-import '/screens/home_screen.dart';
 import '/shared/component.dart';
 
 class OnBoaringModel {

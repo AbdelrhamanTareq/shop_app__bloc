@@ -1,5 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -70,11 +70,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   carouselController: _carouselController,
                                   itemCount:
                                       _productModel!.data!.images!.length,
-                                  itemBuilder: (ctx, index, i) => Image.network(
-                                    _productModel.data!.images![index],
+                                  itemBuilder: (ctx, index, i) => CachedNetworkImage(
+                                  imageUrl:  _productModel.data!.images![index],
                                     width: double.infinity,
                                     // height: double.infinity,
                                     fit: BoxFit.fill,
+                                    placeholder: (context, url) => Image.asset(
+                              "assets/images/placeholder.png",
+                              fit: BoxFit.cover,
+                            ),
+                                    
                                   ),
                                   options: CarouselOptions(
                                       viewportFraction: 1,

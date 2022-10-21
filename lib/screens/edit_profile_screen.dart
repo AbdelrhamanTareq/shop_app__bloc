@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
@@ -72,9 +73,12 @@ class EditProfileScreen extends StatelessWidget {
                           child: ClipOval(
                             child: Stack(
                               children: [
-                                Image(
-                                  image:
-                                      NetworkImage(_profileData.data!.image!),
+                                CachedNetworkImage(
+                                  imageUrl: (_profileData.data!.image!),
+                                  placeholder: (context, url) => Image.asset(
+                                    "assets/images/placeholder.png",
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                                 Positioned(
                                   child: IconButton(

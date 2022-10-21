@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
@@ -64,8 +65,8 @@ class FavoriteScreen extends StatelessWidget {
                             Container(
                               width: 120,
                               height: 120,
-                              child: Image.network(
-                                _favoriteData
+                              child: CachedNetworkImage(
+                               imageUrl: _favoriteData
                                     .data!.dataModel![i].products!.image!,
                                 fit: BoxFit.cover,
                                 width: double.infinity,

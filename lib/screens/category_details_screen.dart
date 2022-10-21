@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -74,11 +75,16 @@ class CategoryDetailsScreen extends StatelessWidget {
                                     Hero(
                                       tag: _categoryDetailsData
                                           .data!.dataModel![i].id!,
-                                      child: Image.network(
-                                        _categoryDetailsData
+                                      child: CachedNetworkImage(
+                                        imageUrl: _categoryDetailsData
                                             .data!.dataModel![i].image!,
                                         // fit: BoxFit.cover,
                                         width: double.infinity,
+                                        placeholder: (context, url) =>
+                                            Image.asset(
+                                          "assets/images/placeholder.png",
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                     (_categoryDetailsData

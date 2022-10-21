@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -35,11 +36,13 @@ class ProductsScreen extends StatelessWidget {
                         itemBuilder: (ctx, index, i) => Container(
                           height: MediaQuery.of(context).size.height / 3,
                           width: double.infinity,
-                          child: Image(
-                            image: NetworkImage(
-                              _homeData.data!.banners[index].image!,
-                            ),
+                          child: CachedNetworkImage(
+                            imageUrl: _homeData.data!.banners[index].image!,
                             fit: BoxFit.cover,
+                            placeholder: (context, url) => Image.asset(
+                              "assets/images/placeholder.png",
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                         options: CarouselOptions(
@@ -103,11 +106,16 @@ class ProductsScreen extends StatelessWidget {
                                             Hero(
                                               tag: _homeData
                                                   .data!.products[i].id!,
-                                              child: Image.network(
-                                                _homeData
+                                              child: CachedNetworkImage(
+                                                imageUrl: _homeData
                                                     .data!.products[i].image!,
                                                 // fit: BoxFit.cover,
                                                 width: double.infinity,
+                                                placeholder: (context, url) =>
+                                                    Image.asset(
+                                                  "assets/images/placeholder.png",
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
                                             (_homeData.data!.products[i]

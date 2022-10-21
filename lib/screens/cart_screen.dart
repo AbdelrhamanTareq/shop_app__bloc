@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
@@ -28,7 +29,10 @@ class CartScreen extends StatelessWidget {
             ),
             body: (_data.data!.cartItem!.length == 0)
                 ? Center(
-                    child: Text(getTranslated(context, 'cart_empty_text'),style: TextStyle(fontSize: 25),),
+                    child: Text(
+                      getTranslated(context, 'cart_empty_text'),
+                      style: TextStyle(fontSize: 25),
+                    ),
                   )
                 : Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -46,9 +50,14 @@ class CartScreen extends StatelessWidget {
                                 Container(
                                   width: 100,
                                   height: 150,
-                                  child: Image.network(
-                                    _data.data!.cartItem![i].product!.image!,
+                                  child: CachedNetworkImage(
+                                    imageUrl: _data
+                                        .data!.cartItem![i].product!.image!,
                                     height: 150,
+                                    placeholder: (context, url) => Image.asset(
+                                      "assets/images/placeholder.png",
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(

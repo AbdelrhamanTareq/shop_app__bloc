@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -62,11 +63,13 @@ class CategoryScreen extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * 0.17,
                       child: Stack(
                         children: [
-                          Image.network(
-                            _categoreyModel!.data!.dataModel![i].image!,
+                          CachedNetworkImage(
+                            imageUrl:
+                                _categoreyModel!.data!.dataModel![i].image!,
                             fit: BoxFit.cover,
                             width: double.infinity,
                             height: double.infinity,
+                            placeholder: (context, url) => Image.asset("assets/images/placeholder.png",fit: BoxFit.cover,),
                           ),
                           Positioned(
                             bottom: 10,

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app_bloc/localiziation/localizatrion_constant.dart';
@@ -65,11 +66,16 @@ class SearchScreen extends StatelessWidget {
                                 Container(
                                   width: 120,
                                   height: 120,
-                                  child: Image.network(
-                                    _searchData!.data!.dataModel[i].image!,
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                        _searchData!.data!.dataModel[i].image!,
                                     fit: BoxFit.cover,
                                     width: double.infinity,
                                     height: double.infinity,
+                                    placeholder: (context, url) => Image.asset(
+                                      "assets/images/placeholder.png",
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
