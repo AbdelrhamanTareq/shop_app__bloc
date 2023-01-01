@@ -17,7 +17,6 @@ import '/screens/home_screen.dart';
 import '/shared/component.dart';
 import '/shared/theme.dart';
 
-//AIzaSyAYn6QIqi6Skqpwy7AOs9K8X3uTRmgTGdk map api
 // abdo123456@test.com
 
 void main() async {
